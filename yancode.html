@@ -1,0 +1,2324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YanCode</title>
+    <link rel="icon" href="icon.png" type="image/x-icon" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --bg-light: #f8fafc;
+            --surface: #ffffff;
+            --text: #0F172A;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --navy: #0F172A;
+            --teal: #14B8A6;
+            --teal-light: #e6f7f5;
+            --teal-pale: #f0fcf9;
+            --teal-dark: #0d9488;
+            --shadow-sm: 0 4px 24px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 12px 48px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 24px 80px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 40px 120px rgba(0, 0, 0, 0.15);
+            --shadow-teal: 0 8px 32px rgba(20, 184, 166, 0.25);
+            --radius-sm: 12px;
+            --radius-md: 24px;
+            --radius-lg: 40px;
+            --radius-xl: 60px;
+            --transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            --transition-smooth: 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body.rtl {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            text-align: right;
+        }
+
+        body.rtl .logo,
+        body.rtl .section-title,
+        body.rtl .hero-content h1 {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        ::selection {
+            background: var(--teal);
+            color: #fff;
+        }
+
+        /* ===== NOTIFICATION TOAST ===== */
+        .toast-container {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            width: 100%;
+            max-width: 480px;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+
+        .toast {
+            background: var(--navy);
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: auto;
+            border-right: 4px solid var(--teal);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        body.rtl .toast {
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--teal);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast .toast-icon {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy);
+            font-size: 0.9rem;
+        }
+
+        .toast .toast-content {
+            flex: 1;
+        }
+
+        .toast .toast-content .toast-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: block;
+        }
+
+        .toast .toast-content .toast-message {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-weight: 300;
+            display: block;
+        }
+
+        .toast .toast-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            padding: 4px;
+            pointer-events: auto;
+        }
+        .toast .toast-close:hover {
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        /* ===== LANGUAGE DROPDOWN ===== */
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .lang-dropdown .selected {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(15, 23, 42, 0.04);
+            padding: 8px 18px;
+            border-radius: 50px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            backdrop-filter: blur(8px);
+        }
+        .lang-dropdown .selected:hover {
+            background: rgba(15, 23, 42, 0.08);
+            border-color: rgba(20, 184, 166, 0.3);
+            box-shadow: var(--shadow-teal);
+        }
+        .lang-dropdown .selected i {
+            font-size: 0.9rem;
+            color: var(--teal);
+        }
+        .lang-dropdown .selected .arrow {
+            font-size: 0.55rem;
+            margin-left: 4px;
+            transition: transform 0.4s ease;
+            color: var(--teal);
+        }
+        .lang-dropdown.open .selected .arrow {
+            transform: rotate(180deg);
+        }
+
+        .lang-dropdown .menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(16px);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(20, 184, 166, 0.15);
+            padding: 8px 0;
+            min-width: 120px;
+            display: none;
+            z-index: 200;
+            overflow: hidden;
+        }
+        body.rtl .lang-dropdown .menu {
+            left: auto;
+            right: 0;
+        }
+        .lang-dropdown.open .menu {
+            display: block;
+            animation: fadeSlideDown 0.3s ease;
+        }
+        @keyframes fadeSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .lang-dropdown .menu .option {
+            padding: 10px 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            transition: var(--transition);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        body.rtl .lang-dropdown .menu .option {
+            letter-spacing: 0;
+            text-transform: none;
+            font-size: 0.8rem;
+        }
+        .lang-dropdown .menu .option:hover {
+            background: var(--teal-pale);
+        }
+        .lang-dropdown .menu .option.active {
+            background: var(--teal-pale);
+            color: var(--teal-dark);
+            font-weight: 600;
+        }
+        .lang-dropdown .menu .option i {
+            width: 18px;
+            font-size: 0.8rem;
+            color: var(--teal);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .lang-dropdown .menu .option.active i {
+            opacity: 1;
+        }
+
+        body.rtl .lang-dropdown {
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(20, 184, 166, 0.15);
+            transition: var(--transition);
+        }
+        .navbar.scrolled {
+            padding: 12px 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+            font-size: 2rem;
+            letter-spacing: -0.5px;
+            position: relative;
+            line-height: 1.1;
+        }
+        .logo .brand-line {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        .logo span {
+            color: var(--teal);
+        }
+        .logo small {
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 0.3px;
+            display: block;
+            line-height: 1.2;
+            margin-top: -2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.8rem;
+            list-style: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            align-items: center;
+        }
+        body.rtl .nav-links {
+            letter-spacing: 0;
+            text-transform: none;
+            font-size: 0.9rem;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            transition: var(--transition);
+            position: relative;
+            padding-bottom: 4px;
+            opacity: 0.7;
+        }
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--teal-dark);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--teal);
+            transition: var(--transition);
+        }
+        body.rtl .nav-links a::after {
+            left: auto;
+            right: 0;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: var(--text);
+            transition: var(--transition);
+            background: none;
+            border: none;
+            padding: 4px 8px;
+        }
+        .hamburger:hover {
+            color: var(--teal);
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            background: var(--text);
+            color: #fff;
+            border: none;
+            padding: 18px 44px;
+            border-radius: 60px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-teal);
+        }
+        .btn-primary span,
+        .btn-primary i {
+            position: relative;
+            z-index: 1;
+        }
+        body.rtl .btn-primary {
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+            border: none;
+            padding: 18px 44px;
+            border-radius: 60px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.25);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-whatsapp::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #1ebe5c, #25D366);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .btn-whatsapp:hover::before {
+            opacity: 1;
+        }
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(37, 211, 102, 0.35);
+        }
+        .btn-whatsapp span,
+        .btn-whatsapp i {
+            position: relative;
+            z-index: 1;
+        }
+        body.rtl .btn-whatsapp {
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--text);
+            padding: 14px 36px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            position: relative;
+        }
+        .btn-outline:hover {
+            background: var(--text);
+            color: var(--bg);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 60px 0 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(20, 184, 166, 0.06), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                padding: 40px 0 60px;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-content .badge {
+            display: inline-block;
+            background: var(--teal-pale);
+            color: var(--teal-dark);
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 8px 22px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(20, 184, 166, 0.2);
+        }
+        body.rtl .hero-content .badge {
+            letter-spacing: 0;
+        }
+
+        .hero-content h1 {
+            font-weight: 700;
+            font-size: 4rem;
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+        }
+        .hero-content h1 .highlight {
+            color: var(--teal);
+            position: relative;
+            display: inline-block;
+        }
+        .hero-content h1 .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--teal-pale);
+            z-index: -1;
+            border-radius: 2px;
+        }
+        body.rtl .hero-content h1 {
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0;
+        }
+        body.rtl .hero-content h1 .highlight::before {
+            bottom: 2px;
+            height: 4px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 480px;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            line-height: 1.8;
+        }
+        body.rtl .hero-content p {
+            letter-spacing: 0;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 36px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        .hero-stats div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .hero-stats i {
+            color: var(--teal);
+            font-size: 1.2rem;
+            width: 1.2rem;
+            text-align: center;
+        }
+
+        .hero-description-box {
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            padding: 48px 40px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(20, 184, 166, 0.08);
+            z-index: 1;
+            transition: var(--transition-smooth);
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-description-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 70%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(20, 184, 166, 0.04), transparent 70%);
+            pointer-events: none;
+        }
+        .hero-description-box:hover {
+            transform: scale(1.01);
+            box-shadow: var(--shadow-xl), 0 0 60px rgba(20, 184, 166, 0.06);
+            border-color: rgba(20, 184, 166, 0.2);
+        }
+        .hero-description-box .quote-icon {
+            font-size: 2.2rem;
+            color: var(--teal);
+            opacity: 0.2;
+            margin-bottom: 12px;
+        }
+        .hero-description-box blockquote {
+            font-size: 1.4rem;
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--text);
+            position: relative;
+            z-index: 1;
+        }
+        .hero-description-box blockquote .highlight {
+            color: var(--teal);
+            font-weight: 600;
+        }
+        .hero-description-box .author {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid rgba(20, 184, 166, 0.1);
+            padding-top: 18px;
+        }
+        .hero-description-box .author .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--teal-pale);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--teal);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .hero-description-box .author .info {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+        .hero-description-box .author .info strong {
+            color: var(--text);
+            font-weight: 600;
+            display: block;
+            font-size: 0.95rem;
+        }
+
+        /* ===== SECTION TITLES ===== */
+        .section-title {
+            font-weight: 700;
+            font-size: 2.8rem;
+            letter-spacing: -0.8px;
+            margin-bottom: 4px;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--teal), var(--teal-light));
+            border-radius: 2px;
+        }
+        body.rtl .section-title {
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0;
+        }
+        body.rtl .section-title::after {
+            left: auto;
+            right: 0;
+            background: linear-gradient(270deg, var(--teal), var(--teal-light));
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            display: block;
+            margin-top: 8px;
+        }
+        body.rtl .section-subtitle {
+            letter-spacing: 0;
+        }
+
+        /* ===== WHY SECTION ===== */
+        .why-section {
+            background: var(--bg-light);
+            border-radius: var(--radius-lg);
+            padding: 60px 40px;
+            margin: 40px 0 50px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(20, 184, 166, 0.06);
+        }
+        @media (max-width: 768px) {
+            .why-section {
+                padding: 40px 20px;
+                margin: 30px 0 40px;
+            }
+        }
+        @media (max-width: 480px) {
+            .why-section {
+                padding: 30px 16px;
+                border-radius: var(--radius-md);
+            }
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+        .why-card {
+            background: var(--surface);
+            padding: 28px 20px;
+            border-radius: var(--radius-md);
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(20, 184, 166, 0.06);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+        .why-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--teal-light);
+        }
+        .why-card .icon-wrap {
+            width: 60px;
+            height: 60px;
+            background: var(--teal-pale);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 14px;
+            font-size: 1.5rem;
+            color: var(--teal);
+            transition: var(--transition);
+        }
+        .why-card:hover .icon-wrap {
+            transform: scale(1.05);
+            background: var(--teal-light);
+        }
+        .why-card h4 {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .why-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+
+        /* ===== SERVICES ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 24px;
+            margin: 32px 0 30px;
+        }
+        .service-card {
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            padding: 28px 16px 24px;
+            text-align: center;
+            border: 1px solid rgba(20, 184, 166, 0.06);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .service-card:hover {
+            border-color: var(--teal-light);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-6px);
+        }
+        .service-card i {
+            font-size: 2.4rem;
+            color: var(--teal);
+            margin-bottom: 14px;
+            width: 2.4rem;
+            text-align: center;
+        }
+        .service-card h4 {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            font-weight: 300;
+        }
+
+        /* ============================================================
+           GLOBAL BUILDER SECTION - All Services in One Place
+        ============================================================ */
+        .builder-section {
+            margin: 50px 0 40px;
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            padding: 48px 44px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(20, 184, 166, 0.06);
+        }
+
+        @media (max-width: 768px) {
+            .builder-section {
+                padding: 32px 20px;
+                border-radius: var(--radius-lg);
+            }
+        }
+
+        .builder-section .section-title::after {
+            width: 80px;
+        }
+
+        .builder-category {
+            margin-bottom: 32px;
+        }
+
+        .builder-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .builder-category-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(20, 184, 166, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .builder-category-title i {
+            color: var(--teal);
+            font-size: 1.2rem;
+        }
+
+        .builder-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .builder-option {
+            background: var(--bg-light);
+            border-radius: var(--radius-md);
+            padding: 18px 16px;
+            border: 2px solid transparent;
+            transition: var(--transition);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .builder-option:hover {
+            border-color: var(--teal-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .builder-option.selected {
+            border-color: var(--teal);
+            background: var(--teal-pale);
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+        }
+
+        .builder-option .option-check {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--teal);
+            color: #fff;
+            font-size: 0.7rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        body.rtl .builder-option .option-check {
+            right: auto;
+            left: 8px;
+        }
+        .builder-option.selected .option-check {
+            display: flex;
+        }
+
+        .builder-option .option-icon {
+            font-size: 1.8rem;
+            color: var(--teal);
+            margin-bottom: 8px;
+        }
+
+        .builder-option .option-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .builder-option .option-price {
+            font-size: 0.8rem;
+            color: var(--teal-dark);
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .builder-option .option-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-top: 2px;
+        }
+
+        /* Builder Summary */
+        .builder-summary {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 2px solid rgba(20, 184, 166, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .builder-total {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .builder-total .total-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .builder-total .total-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--teal-dark);
+        }
+
+        .builder-selected-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .builder-selected-item {
+            background: var(--teal-pale);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--teal-dark);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .builder-selected-item .remove-btn {
+            cursor: pointer;
+            font-size: 0.7rem;
+            opacity: 0.5;
+            transition: var(--transition);
+        }
+        .builder-selected-item .remove-btn:hover {
+            opacity: 1;
+            color: #ef4444;
+        }
+
+        .builder-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Review Banner */
+        .review-banner {
+            background: var(--bg-light);
+            border-radius: var(--radius-lg);
+            padding: 48px 44px;
+            margin: 40px 0 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            border: 1px solid rgba(20, 184, 166, 0.06);
+            box-shadow: var(--shadow-sm);
+        }
+
+        @media (max-width: 768px) {
+            .review-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 32px 24px;
+            }
+        }
+
+        .review-banner .review-content {
+            flex: 1;
+        }
+
+        .review-banner .review-content .review-badge {
+            display: inline-block;
+            background: var(--teal-pale);
+            color: var(--teal-dark);
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 4px 16px;
+            border-radius: 50px;
+            margin-bottom: 10px;
+        }
+        body.rtl .review-banner .review-content .review-badge {
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        .review-banner .review-content h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .review-banner .review-content p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 300;
+            max-width: 480px;
+            line-height: 1.7;
+        }
+
+        .review-banner .review-content .stars {
+            display: flex;
+            gap: 4px;
+            color: #f59e0b;
+            font-size: 1.2rem;
+            margin: 10px 0 12px;
+        }
+        body.rtl .review-banner .review-content .stars {
+            justify-content: flex-start;
+        }
+        @media (max-width: 768px) {
+            body.rtl .review-banner .review-content .stars {
+                justify-content: center;
+            }
+        }
+
+        .review-banner .review-content .rating-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .review-banner .qr-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .review-banner .qr-wrapper .qr-box {
+            background: var(--surface);
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(20, 184, 166, 0.08);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .review-banner .qr-wrapper .qr-box:hover {
+            box-shadow: var(--shadow-md);
+            transform: scale(1.02);
+        }
+
+        .review-banner .qr-wrapper .qr-box i {
+            font-size: 4rem;
+            color: var(--teal);
+            opacity: 0.4;
+        }
+
+        .review-banner .qr-wrapper .qr-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .review-banner .qr-wrapper .qr-label i {
+            color: var(--teal);
+            margin-left: 4px;
+        }
+
+        /* ===== CONTACT CTA ===== */
+        .cta-section {
+            text-align: center;
+            padding: 50px 0 30px;
+        }
+        .cta-section h2 {
+            font-size: 2.6rem;
+            margin-bottom: 6px;
+            display: block;
+            font-weight: 700;
+        }
+        .cta-section .sub {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            display: block;
+            font-weight: 300;
+        }
+        .cta-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            background: #25D366;
+            padding: 16px 48px;
+            border-radius: 60px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.3rem;
+            box-shadow: 0 12px 32px rgba(37, 211, 102, 0.3);
+            transition: var(--transition);
+        }
+        .cta-whatsapp i {
+            font-size: 2rem;
+        }
+        .cta-whatsapp:hover {
+            transform: scale(1.03);
+            box-shadow: 0 18px 44px rgba(37, 211, 102, 0.4);
+            background: #1da851;
+        }
+        .cta-phone {
+            margin-top: 28px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .cta-phone i {
+            color: var(--teal);
+            margin-left: 6px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            border-top: 1px solid rgba(20, 184, 166, 0.12);
+            padding: 28px 0 24px;
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+        footer .brand {
+            font-weight: 600;
+            color: var(--text);
+        }
+        footer i {
+            color: var(--teal);
+            margin: 0 4px;
+        }
+
+        /* ===== FLOATING WHATSAPP ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: #25D366;
+            color: #fff;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 12px 48px rgba(37, 211, 102, 0.35);
+            z-index: 200;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.08);
+            box-shadow: 0 16px 60px rgba(37, 211, 102, 0.45);
+        }
+        body.rtl .whatsapp-float {
+            right: auto;
+            left: 32px;
+        }
+
+        /* ===== LANGUAGE HELPER ===== */
+        [data-lang] {
+            display: none;
+        }
+        [data-lang].active {
+            display: inline-block;
+        }
+
+        .nav-links [data-lang].active {
+            display: inline-block;
+        }
+
+        .service-card h4[data-lang],
+        .service-card p[data-lang] {
+            display: none;
+        }
+        .service-card h4[data-lang].active,
+        .service-card p[data-lang].active {
+            display: block;
+        }
+
+        .description-text[data-lang],
+        .sub[data-lang],
+        .logo small[data-lang] {
+            display: none;
+        }
+        .description-text[data-lang].active,
+        .sub[data-lang].active,
+        .logo small[data-lang].active {
+            display: block;
+        }
+
+        .section-subtitle[data-lang] {
+            display: none;
+        }
+        .section-subtitle[data-lang].active {
+            display: block;
+        }
+
+        .review-banner [data-lang] {
+            display: none;
+        }
+        .review-banner [data-lang].active {
+            display: inline-block;
+        }
+
+        .builder-option [data-lang] {
+            display: none;
+        }
+        .builder-option [data-lang].active {
+            display: inline-block;
+        }
+
+        .builder-selected-item [data-lang] {
+            display: none;
+        }
+        .builder-selected-item [data-lang].active {
+            display: inline-block;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 820px) {
+            .container {
+                padding: 0 20px;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 0.5rem;
+                background: var(--bg);
+                width: 100%;
+                padding: 16px 0;
+                border-top: 1px solid rgba(20, 184, 166, 0.1);
+                margin-top: 8px;
+            }
+            .nav-links.open {
+                display: flex;
+                animation: fadeSlideDown 0.3s ease;
+            }
+            .nav-links a {
+                padding: 8px 12px;
+                border-radius: 8px;
+                width: 100%;
+                text-align: center;
+            }
+            .nav-links a:hover {
+                background: var(--teal-pale);
+            }
+            .hamburger {
+                display: block;
+            }
+            .navbar {
+                padding: 12px 0;
+                gap: 4px;
+            }
+            .navbar-left {
+                gap: 16px;
+                flex: 1;
+                justify-content: space-between;
+            }
+            .logo {
+                font-size: 1.6rem;
+            }
+            .hero {
+                padding: 30px 0 50px;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            .hero-description-box {
+                padding: 32px 24px;
+                min-height: 240px;
+            }
+            .hero-description-box blockquote {
+                font-size: 1.2rem;
+            }
+            .why-section {
+                padding: 40px 24px;
+            }
+            .review-banner {
+                padding: 32px 24px;
+            }
+            .review-banner .review-content h3 {
+                font-size: 1.5rem;
+            }
+            .builder-section {
+                padding: 32px 20px;
+            }
+            .builder-options {
+                grid-template-columns: 1fr 1fr;
+            }
+            .builder-summary {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .builder-selected-list {
+                justify-content: center;
+            }
+            .builder-actions {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .builder-options {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .review-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 24px 18px;
+            }
+            .review-banner .review-content .stars {
+                justify-content: center;
+            }
+            .review-banner .review-content p {
+                max-width: 100%;
+            }
+            .builder-total .total-price {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+            .hero-actions .btn-primary,
+            .hero-actions .btn-outline,
+            .hero-actions .btn-whatsapp {
+                width: 100%;
+                justify-content: center;
+            }
+            .hero-stats {
+                gap: 14px;
+            }
+            .hero-stats div {
+                font-size: 0.8rem;
+            }
+            .hero-description-box {
+                padding: 24px 18px;
+                min-height: 200px;
+            }
+            .hero-description-box blockquote {
+                font-size: 1rem;
+            }
+            .hero-description-box .author .info {
+                font-size: 0.75rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .section-subtitle {
+                font-size: 0.95rem;
+                margin-bottom: 28px;
+            }
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+            .cta-whatsapp {
+                padding: 12px 24px;
+                font-size: 1.1rem;
+            }
+            .cta-whatsapp i {
+                font-size: 1.4rem;
+            }
+            .whatsapp-float {
+                width: 48px;
+                height: 48px;
+                font-size: 1.4rem;
+                bottom: 16px;
+                right: 16px;
+            }
+            body.rtl .whatsapp-float {
+                right: auto;
+                left: 16px;
+            }
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+            }
+            .why-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+            }
+            .why-section {
+                padding: 28px 16px;
+                border-radius: var(--radius-md);
+            }
+            .review-banner .review-content h3 {
+                font-size: 1.3rem;
+            }
+            .review-banner .qr-wrapper .qr-box i {
+                font-size: 3rem;
+            }
+            .builder-section {
+                padding: 24px 16px;
+            }
+            .builder-options {
+                grid-template-columns: 1fr;
+            }
+            .builder-total .total-price {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .services-grid,
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div class="toast-container" id="toastContainer">
+        <div class="toast" id="toast">
+            <div class="toast-icon"><i class="fas fa-check"></i></div>
+            <div class="toast-content">
+                <span class="toast-title" id="toastTitle">تمت الإضافة</span>
+                <span class="toast-message" id="toastMessage">تم إضافة الخدمة بنجاح</span>
+            </div>
+            <button class="toast-close" id="toastClose"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; width: 100%;">
+            <div class="navbar-left">
+                <a href="#" class="logo">
+                    <div>YanCode</div>
+                    <small data-lang="ar" class="active">مواقع عصريّة لأعمالك</small>
+                    <small data-lang="fr">Sites modernes pour Vous.</small>
+                    <small data-lang="en">Modern Websites for You.</small>
+                </a>
+                <div class="lang-dropdown" id="langDropdown">
+                    <div class="selected" id="langSelected">
+                        <i class="fas fa-globe"></i>
+                        <span data-lang="ar" class="active">عربي</span>
+                        <span data-lang="fr">FR</span>
+                        <span data-lang="en">EN</span>
+                        <span class="arrow"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="menu">
+                        <div class="option active" data-lang-value="ar"><i class="fas fa-check"></i> عربي</div>
+                        <div class="option" data-lang-value="fr"><i class="fas fa-check"></i> Français</div>
+                        <div class="option" data-lang-value="en"><i class="fas fa-check"></i> English</div>
+                    </div>
+                </div>
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#services" data-lang="ar" class="active">خدماتنا</a><a href="#services" data-lang="fr">Services</a><a href="#services" data-lang="en">Services</a></li>
+                <li><a href="#builder" data-lang="ar" class="active">بناء باقات</a><a href="#builder" data-lang="fr">Créez votre offre</a><a href="#builder" data-lang="en">Build Your Package</a></li>
+                <li><a href="#contact" data-lang="ar" class="active">تواصل</a><a href="#contact" data-lang="fr">Contact</a><a href="#contact" data-lang="en">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- ===== HERO ===== -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="badge"><i class="fas fa-crown" style="margin-left:8px;"></i>
+                    <span data-lang="ar" class="active"> حضور رقمي فاخر</span>
+                    <span data-lang="fr"> Présence numérique premium</span>
+                    <span data-lang="en"> Premium Digital Presence</span>
+                </div>
+
+                <h1 data-lang="ar" class="active">موقع إلكتروني <span class="highlight">عصري</span> لأعمالك</h1>
+                <h1 data-lang="fr">Site web <span class="highlight">moderne</span> pour vous.</h1>
+                <h1 data-lang="en">A <span class="highlight">modern</span> website for you.</h1>
+
+                <p data-lang="ar" class="active">YanCode يصنع هويتك الرقمية بأناقة احترافية</p>
+                <p data-lang="fr">YanCode crée votre identité numérique avec une élégance professionnelle</p>
+                <p data-lang="en">YanCode crafts your digital identity with professional elegance</p>
+
+                <div class="hero-actions">
+                    <a href="#builder" class="btn-primary"><i class="fas fa-rocket"></i> <span data-lang="ar" class="active">ابني باقاتك</span><span data-lang="fr">Créez votre offre</span><span data-lang="en">Build Your Package</span></a>
+                    <a href="#contact" class="btn-outline"><i class="fas fa-phone"></i> <span data-lang="ar" class="active">تواصل</span><span data-lang="fr">Contact</span><span data-lang="en">Contact</span></a>
+                </div>
+
+            </div>
+
+            <div class="hero-description-box">
+                <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                <blockquote>
+                    <span data-lang="ar" class="active">
+                        "نصنع <span class="highlight">هويتك الرقمية</span> بأناقة واحترافية،
+                        لأن موقعك الإلكتروني هو <span class="highlight">انطباعك الأول</span> أمام عملائك."
+                    </span>
+                    <span data-lang="fr">
+                        "Nous créons votre <span class="highlight">identité numérique</span> avec élégance et professionnalisme,
+                        car votre site web est votre <span class="highlight">première impression</span>."
+                    </span>
+                    <span data-lang="en">
+                        "We craft your <span class="highlight">digital identity</span> with elegance and professionalism,
+                        because your website is your <span class="highlight">first impression</span>."
+                    </span>
+                </blockquote>
+
+
+                <div class="hero-stats">
+                    <div><i class="fas fa-check-circle"></i> <span data-lang="ar" class="active">50+ مشروع</span><span data-lang="fr">50+ projets</span><span data-lang="en">50+ projects</span></div>
+                    <div><i class="fas fa-star"></i> <span data-lang="ar" class="active">4.9 / 5 تقييم</span><span data-lang="fr">4.9 / 5 avis</span><span data-lang="en">4.9 / 5 rating</span></div>
+                </div>
+
+
+                <div class="author">
+                    <div class="avatar">Y</div>
+                    <div class="info">
+                        <strong>YanCode</strong>
+                        <span data-lang="ar" class="active">حلول رقمية مبتكرة</span>
+                        <span data-lang="fr">Solutions numériques innovantes</span>
+                        <span data-lang="en">Innovative digital solutions</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ===== WHY NEED WEBSITE ===== -->
+        <section class="why-section">
+            <div style="max-width:100%;">
+                <h2 class="section-title" data-lang="ar" class="active">لماذا تحتاج إلى موقع إلكتروني؟</h2>
+                <h2 class="section-title" data-lang="fr">Pourquoi avez-vous besoin d'un site web ?</h2>
+                <h2 class="section-title" data-lang="en">Why do you need a website?</h2>
+
+                <span class="section-subtitle" data-lang="ar" class="active">5 أسباب تجعل موقعك الإلكتروني ضرورة لأعمالك</span>
+                <span class="section-subtitle" data-lang="fr">5 raisons pour lesquelles votre site web est essentiel</span>
+                <span class="section-subtitle" data-lang="en">5 reasons why your website is essential for your business</span>
+
+                <div class="why-grid">
+                    <div class="why-card"><div class="icon-wrap"><i class="fas fa-handshake"></i></div><h4 data-lang="ar" class="active">تعزيز ثقة العملاء</h4><h4 data-lang="fr">Renforcer la confiance</h4><h4 data-lang="en">Boost client trust</h4><p data-lang="ar" class="active">بناء علاقة ثقة مع عملائك</p><p data-lang="fr">Construire une relation de confiance</p><p data-lang="en">Build trust with your clients</p></div>
+                    <div class="why-card"><div class="icon-wrap"><i class="fas fa-clock"></i></div><h4 data-lang="ar" class="active">تواجد 24/7</h4><h4 data-lang="fr">Présence 24/7</h4><h4 data-lang="en">24/7 Presence</h4><p data-lang="ar" class="active">متاح دائماً لعملائك</p><p data-lang="fr">Disponible pour vos clients</p><p data-lang="en">Always available for your clients</p></div>
+                    <div class="why-card"><div class="icon-wrap"><i class="fas fa-users"></i></div><h4 data-lang="ar" class="active">وصول إلى عملاء جدد</h4><h4 data-lang="fr">Atteindre de nouveaux clients</h4><h4 data-lang="en">Reach new customers</h4><p data-lang="ar" class="active">توسيع قاعدة عملائك</p><p data-lang="fr">Élargir votre clientèle</p><p data-lang="en">Expand your customer base</p></div>
+                    <div class="why-card"><div class="icon-wrap"><i class="fas fa-briefcase"></i></div><h4 data-lang="ar" class="active">عرض احترافي</h4><h4 data-lang="fr">Présentation professionnelle</h4><h4 data-lang="en">Professional presentation</h4><p data-lang="ar" class="active">تقديم خدماتك بأفضل صورة</p><p data-lang="fr">Présenter vos services au mieux</p><p data-lang="en">Present your services at their best</p></div>
+                    <div class="why-card"><div class="icon-wrap"><i class="fas fa-google"></i></div><h4 data-lang="ar" class="active">ظهور على Google</h4><h4 data-lang="fr">Visibilité sur Google</h4><h4 data-lang="en">Google visibility</h4><p data-lang="ar" class="active">تحسين ظهورك في محركات البحث</p><p data-lang="fr">Améliorer votre visibilité</p><p data-lang="en">Improve your search visibility</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SERVICES ===== -->
+        <section id="services">
+            <h2 class="section-title" data-lang="ar" class="active">خدماتنا</h2>
+            <h2 class="section-title" data-lang="fr">Nos services</h2>
+            <h2 class="section-title" data-lang="en">Our Services</h2>
+            <span class="section-subtitle" data-lang="ar" class="active">حلول رقمية متكاملة لنجاح أعمالك</span>
+            <span class="section-subtitle" data-lang="fr">Des solutions numériques complètes pour votre succès</span>
+            <span class="section-subtitle" data-lang="en">Complete digital solutions for your success</span>
+
+            <div class="services-grid">
+                <div class="service-card"><i class="fas fa-globe"></i><h4 data-lang="ar" class="active">تصميم مواقع احترافية</h4><h4 data-lang="fr">Design de sites</h4><h4 data-lang="en">Web Design</h4><p data-lang="ar" class="active">أناقة ووظائف متكاملة</p><p data-lang="fr">Élégance et fonctionnalités</p><p data-lang="en">Elegance &amp; features</p></div>
+                <div class="service-card"><i class="fas fa-mobile-alt"></i><h4 data-lang="ar" class="active">متوافق مع جميع الأجهزة</h4><h4 data-lang="fr">Responsive</h4><h4 data-lang="en">Fully Responsive</h4><p data-lang="ar" class="active">تجربة سلسة للجميع</p><p data-lang="fr">Expérience fluide</p><p data-lang="en">Seamless experience</p></div>
+                <div class="service-card"><i class="fas fa-bolt"></i><h4 data-lang="ar" class="active">سريع وآمن</h4><h4 data-lang="fr">Rapide et sécurisé</h4><h4 data-lang="en">Fast &amp; Secure</h4><p data-lang="ar" class="active">أداء مثالي وأمان عالي</p><p data-lang="fr">Performance et sécurité</p><p data-lang="en">Performance &amp; security</p></div>
+                <div class="service-card"><i class="fas fa-search"></i><h4 data-lang="ar" class="active">تحسين SEO</h4><h4 data-lang="fr">Optimisation SEO</h4><h4 data-lang="en">SEO Optimization</h4><p data-lang="ar" class="active">ظهور أفضل في البحث</p><p data-lang="fr">Meilleure visibilité</p><p data-lang="en">Better search visibility</p></div>
+                <div class="service-card"><i class="fas fa-server"></i><h4 data-lang="ar" class="active">استضافة مجانية</h4><h4 data-lang="fr">Hébergement gratuit</h4><h4 data-lang="en">Free Hosting</h4><p data-lang="ar" class="active">لمدة سنة كاملة</p><p data-lang="fr">Pour un an</p><p data-lang="en">For one year</p></div>
+                <div class="service-card"><i class="fas fa-expand-arrows-alt"></i><h4 data-lang="ar" class="active">قابل للتطوير</h4><h4 data-lang="fr">Évolutif</h4><h4 data-lang="en">Scalable</h4><p data-lang="ar" class="active">أضف مزايا مستقبلاً</p><p data-lang="fr">Ajoutez des fonctionnalités</p><p data-lang="en">Add features later</p></div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        GLOBAL BUILDER SECTION - All Services in One Place
+        ============================================================ -->
+        <section id="builder" class="builder-section">
+            <h2 class="section-title" data-lang="ar" class="active">ابني باقاتك المثالية</h2>
+            <h2 class="section-title" data-lang="fr">Créez votre offre idéale</h2>
+            <h2 class="section-title" data-lang="en">Build Your Perfect Package</h2>
+            <span class="section-subtitle" data-lang="ar" class="active">اختر الخدمات التي تحتاجها واحصل على عرض سعر مخصص</span>
+            <span class="section-subtitle" data-lang="fr">Choisissez les services dont vous avez besoin et obtenez un devis personnalisé</span>
+            <span class="section-subtitle" data-lang="en">Select the services you need and get a custom quote</span>
+
+            <!-- Category 1: Website Creation -->
+            <div class="builder-category">
+                <div class="builder-category-title">
+                    <i class="fas fa-globe"></i>
+                    <span data-lang="ar" class="active">إنشاء الموقع الإلكتروني</span>
+                    <span data-lang="fr">Création de site web</span>
+                    <span data-lang="en">Website Creation</span>
+                </div>
+                <div class="builder-options">
+                    <div class="builder-option" data-service="basic" data-price="999">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">موقع تعريفي - أساسي</div>
+                        <div class="option-name" data-lang="fr">Site vitrine - Basique</div>
+                        <div class="option-name" data-lang="en">Showcase - Basic</div>
+                        <div class="option-price">999
+                            <span data-lang="ar">درهم</span>
+                            <span data-lang="fr">MAD</span>
+                            <span data-lang="en">MAD</span>
+                        </div>
+                        <div class="option-desc" data-lang="ar" class="active">3 صفحات · متجاوب · نموذج تواصل</div>
+                        <div class="option-desc" data-lang="fr">3 pages · Responsive · Formulaire</div>
+                        <div class="option-desc" data-lang="en">3 pages · Responsive · Contact form</div>
+                    </div>
+                    <div class="builder-option" data-service="professional" data-price="1999">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-star"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">موقع احترافي - متقدم</div>
+                        <div class="option-name" data-lang="fr">Site professionnel - Avancé</div>
+                        <div class="option-name" data-lang="en">Professional - Advanced</div>
+                        <div class="option-price">1999
+                            <span data-lang="ar">درهم</span>
+                            <span data-lang="fr">MAD</span>
+                            <span data-lang="en">MAD</span>
+                        </div>
+                        <div class="option-desc" data-lang="ar" class="active">5 صفحات · SEO · بريد إلكتروني · دعم</div>
+                        <div class="option-desc" data-lang="fr">5 pages · SEO · Email · Support</div>
+                        <div class="option-desc" data-lang="en">5 pages · SEO · Email · Support</div>
+                    </div>
+                    <div class="builder-option" data-service="premium" data-price="2999">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-crown"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">موقع متكامل - بريميوم</div>
+                        <div class="option-name" data-lang="fr">Site complet - Premium</div>
+                        <div class="option-name" data-lang="en">Complete - Premium</div>
+                        <div class="option-price">2999
+                            <span data-lang="ar">درهم</span>
+                            <span data-lang="fr">MAD</span>
+                            <span data-lang="en">MAD</span>
+                        </div>
+                        <div class="option-desc" data-lang="ar" class="active">10 صفحات · SEO متقدم · 5 بريد · 3 شهور دعم</div>
+                        <div class="option-desc" data-lang="fr">10 pages · SEO avancé · 5 emails · 3 mois support</div>
+                        <div class="option-desc" data-lang="en">10 pages · Advanced SEO · 5 emails · 3 months support</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 2: Identity Services -->
+            <div class="builder-category">
+                <div class="builder-category-title">
+                    <i class="fas fa-id-card"></i>
+                    <span data-lang="ar" class="active">خدمات الهوية الرقمية</span>
+                    <span data-lang="fr">Services d'identité numérique</span>
+                    <span data-lang="en">Digital Identity Services</span>
+                </div>
+                <div class="builder-options">
+                    <div class="builder-option" data-service="logo" data-price="399">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-paint-brush"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">تصميم شعار احترافي</div>
+                        <div class="option-name" data-lang="fr">Création de logo professionnel</div>
+                        <div class="option-name" data-lang="en">Professional Logo Design</div>
+                        <div class="option-price">399
+                            <span data-lang="ar">درهم</span>
+                            <span data-lang="fr">MAD</span>
+                            <span data-lang="en">MAD</span>
+                        </div>
+                        <div class="option-desc" data-lang="ar" class="active">شعار مميز + 3 تعديلات</div>
+                        <div class="option-desc" data-lang="fr">Logo distinctif + 3 révisions</div>
+                        <div class="option-desc" data-lang="en">Distinctive logo + 3 revisions</div>
+                    </div>
+                    <div class="builder-option" data-service="google" data-price="249">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fab fa-google"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">هوية Google Business</div>
+                        <div class="option-name" data-lang="fr">Identité Google Business</div>
+                        <div class="option-name" data-lang="en">Google Business Identity</div>
+                        <div class="option-price">249
+                            <span data-lang="ar">درهم</span>
+                            <span data-lang="fr">MAD</span>
+                            <span data-lang="en">MAD</span>
+                        </div>
+                        <div class="option-desc" data-lang="ar" class="active">تهيئة كاملة + إدارة أولية</div>
+                        <div class="option-desc" data-lang="fr">Configuration complète + gestion initiale</div>
+                        <div class="option-desc" data-lang="en">Full setup + initial management</div>
+                    </div>
+                    <div class="builder-option" data-service="review" data-price="149">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-qrcode"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">باقة التقييمات الذكية</div>
+                        <div class="option-name" data-lang="fr">Pack Avis Intelligent</div>
+                        <div class="option-name" data-lang="en">Smart Review Pack</div>
+                        <div class="option-price">149
+                            <span data-lang="ar">درهم</span>
+                            <span data-lang="fr">MAD</span>
+                            <span data-lang="en">MAD</span>
+                        </div>
+                        <div class="option-desc" data-lang="ar" class="active">رمز QR · نظام تقييم</div>
+                        <div class="option-desc" data-lang="fr">QR code · Système d'avis</div>
+                        <div class="option-desc" data-lang="en">QR code · Review system</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 3: Maintenance & Extras -->
+            <div class="builder-category">
+                <div class="builder-category-title">
+                    <i class="fas fa-tools"></i>
+                    <span data-lang="ar" class="active">الصيانة والخدمات الإضافية</span>
+                    <span data-lang="fr">Maintenance et services supplémentaires</span>
+                    <span data-lang="en">Maintenance & Additional Services</span>
+                </div>
+                <div class="builder-options">
+                    <div class="builder-option" data-service="pages" data-price="149">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-plus-circle"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">إضافة صفحة جديدة</div>
+                        <div class="option-name" data-lang="fr">Ajouter une page</div>
+                        <div class="option-name" data-lang="en">Add new page</div>
+                        <div class="option-price">149
+                            <span data-lang="ar">درهم</span>
+                            <span data-lang="fr">MAD</span>
+                            <span data-lang="en">MAD</span>
+                        </div>
+                        <div class="option-desc" data-lang="ar" class="active">صفحة واحدة بتصميم احترافي</div>
+                        <div class="option-desc" data-lang="fr">Une page avec design professionnel</div>
+                        <div class="option-desc" data-lang="en">One page with professional design</div>
+                    </div>
+                    <div class="builder-option" data-service="content" data-price="79">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-sync-alt"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">تحديث المحتوى</div>
+                        <div class="option-name" data-lang="fr">Mise à jour du contenu</div>
+                        <div class="option-name" data-lang="en">Content update</div>
+                        <div class="option-price">79
+                            <span data-lang="ar">درهم</span>
+                            <span data-lang="fr">MAD</span>
+                            <span data-lang="en">MAD</span>
+                        </div>
+                        <div class="option-desc" data-lang="ar" class="active">تحديث النصوص والصور</div>
+                        <div class="option-desc" data-lang="fr">Mise à jour des textes et images</div>
+                        <div class="option-desc" data-lang="en">Update text and images</div>
+                    </div>
+                    <div class="builder-option" data-service="features" data-price="199">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-puzzle-piece"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">إضافة مميزات جديدة</div>
+                        <div class="option-name" data-lang="fr">Ajouter des fonctionnalités</div>
+                        <div class="option-name" data-lang="en">Add new features</div>
+                        <div class="option-price">199
+                            <span data-lang="ar">درهم</span>
+                            <span data-lang="fr">MAD</span>
+                            <span data-lang="en">MAD</span>
+                        </div>
+                        <div class="option-desc" data-lang="ar" class="active">وظيفة جديدة حسب الطلب</div>
+                        <div class="option-desc" data-lang="fr">Fonctionnalité sur mesure</div>
+                        <div class="option-desc" data-lang="en">Custom feature</div>
+                    </div>
+                    <div class="builder-option" data-service="maintenance" data-price="99">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-tools"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">صيانة شهرية</div>
+                        <div class="option-name" data-lang="fr">Maintenance mensuelle</div>
+                        <div class="option-name" data-lang="en">Monthly maintenance</div>
+                        <div class="option-price">99
+                            <span data-lang="ar">درهم/شهر</span>
+                            <span data-lang="fr">MAD/ mois</span>
+                            <span data-lang="en">MAD/month</span>
+                        </div>
+                        <div class="option-desc" data-lang="ar" class="active">تحديثات · نسخ احتياطي · أمان</div>
+                        <div class="option-desc" data-lang="fr">Mises à jour · Sauvegarde · Sécurité</div>
+                        <div class="option-desc" data-lang="en">Updates · Backup · Security</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Builder Summary -->
+            <div class="builder-summary">
+                <div class="builder-total">
+                    <span class="total-label" data-lang="ar" class="active">المجموع التقديري</span>
+                    <span class="total-label" data-lang="fr">Total estimé</span>
+                    <span class="total-label" data-lang="en">Estimated Total</span>
+                    <span class="total-price" id="totalPrice">0</span>
+                    <span data-lang="ar">درهم</span>
+                    <span data-lang="fr">MAD</span>
+                    <span data-lang="en">MAD</span>
+                </div>
+
+                <div class="builder-selected-list" id="selectedList">
+                    <!-- Selected items will appear here -->
+                </div>
+
+                <div class="builder-actions">
+                    <a href="#" class="btn-whatsapp" id="builderWhatsAppBtn" style="padding: 12px 32px; font-size: 0.85rem;">
+                        <i class="fab fa-whatsapp"></i>
+                        <span data-lang="ar" class="active">طلب عرض السعر</span>
+                        <span data-lang="fr">Demander un devis</span>
+                        <span data-lang="en">Request Quote</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== REVIEW BANNER ===== -->
+        <div class="review-banner">
+            <div class="review-content">
+                <div class="review-badge"><i class="fas fa-star" style="margin-left:6px;"></i>
+                    <span data-lang="ar" class="active"> تقييم العملاء</span>
+                    <span data-lang="fr">Avis clients</span>
+                    <span data-lang="en">Client Reviews</span>
+                </div>
+                <br>
+                <h3 data-lang="ar" class="active">شاركنا رأيك بسهولة</h3>
+                <h3 data-lang="fr">Partagez votre avis facilement</h3>
+                <h3 data-lang="en">Share your review easily</h3>
+                <br>
+                <p data-lang="ar" class="active">امسح رمز QR للمشاركة بتقييمك السريع. رأيك يساعدنا على التطور ويُظهر للآخرين جودة خدماتنا.</p>
+                <p data-lang="fr">Scannez le QR code pour partager votre avis rapide. Votre retour nous aide à évoluer et montre la qualité de nos services.</p>
+                <p data-lang="en">Scan the QR code to share your quick review. Your feedback helps us grow and shows others the quality of our services.</p>
+
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <span class="rating-text" data-lang="ar" class="active">4.9/5 من 50+ تقييم</span>
+                <span class="rating-text" data-lang="fr">4.9/5 de 50+ avis</span>
+                <span class="rating-text" data-lang="en">4.9/5 from 50+ reviews</span>
+            </div>
+
+            <div class="qr-wrapper">
+                <div class="qr-box">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <span class="qr-label"><i class="fas fa-camera"></i> <span data-lang="ar" class="active">امسح للمشاركة</span><span data-lang="fr">Scannez pour partager</span><span data-lang="en">Scan to share</span></span>
+            </div>
+        </div>
+
+        <!-- ===== CONTACT CTA ===== -->
+        <section id="contact" class="cta-section">
+            <h2>
+                <span data-lang="ar" class="active">تواصل معنا الآن</span>
+                <span data-lang="fr">Contactez-nous maintenant</span>
+                <span data-lang="en">Contact us now</span>
+            </h2>
+            <p class="sub" data-lang="ar" class="active">YanCode · موقع إلكتروني عصري لأعمالك</p>
+            <p class="sub" data-lang="fr">YanCode · Site web moderne pour votre entreprise</p>
+            <p class="sub" data-lang="en">YanCode · Modern Website for Your Business</p>
+            <a href="#" class="cta-whatsapp" id="mainWhatsAppBtn">
+                <i class="fab fa-whatsapp"></i>
+                <span data-lang="ar" class="active">أرسل لنا على واتساب</span>
+                <span data-lang="fr">Envoyez-nous un WhatsApp</span>
+                <span data-lang="en">Send us a WhatsApp</span>
+            </a>
+
+            <p class="cta-phone"><i class="fas fa-phone-alt"></i> +212 704-771336</p>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer>
+            <div><span class="brand">Yan<span style="color:var(--teal);">Code</span></span> © 2026 · <span data-lang="ar" class="active">مواقع عصريّة لأعمالك</span><span data-lang="fr">Sites modernes</span><span data-lang="en">Modern Websites</span></div>
+            <div><i class="fas fa-language"></i> عربي · FR · EN</div>
+        </footer>
+    </div>
+
+    <!-- ===== FLOATING WHATSAPP ===== -->
+    <a href="#" class="whatsapp-float" id="floatWhatsAppBtn" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        (function() {
+            // ---- Language Switcher ----
+            const langOptions = document.querySelectorAll('.lang-dropdown .option');
+            const langDropdown = document.getElementById('langDropdown');
+            const langSelected = document.getElementById('langSelected');
+            const allLangElements = document.querySelectorAll('[data-lang]');
+
+            let currentLang = 'ar';
+
+            // ============================================================
+            // GLOBAL BUILDER - DECLARE EARLY
+            // ============================================================
+            const phoneNumber = '212704771336';
+            const baseUrl = 'https://wa.me/' + phoneNumber;
+
+            // Service metadata - all languages
+            const serviceLabels = {
+                'basic': { ar: 'موقع تعريفي - أساسي', fr: 'Site vitrine - Basique', en: 'Showcase - Basic' },
+                'professional': { ar: 'موقع احترافي - متقدم', fr: 'Site professionnel - Avancé', en: 'Professional - Advanced' },
+                'premium': { ar: 'موقع متكامل - بريميوم', fr: 'Site complet - Premium', en: 'Complete - Premium' },
+                'logo': { ar: 'تصميم شعار احترافي', fr: 'Création de logo', en: 'Logo Design' },
+                'google': { ar: 'هوية Google Business', fr: 'Identité Google Business', en: 'Google Business' },
+                'review': { ar: 'باقة التقييمات الذكية', fr: 'Pack Avis Intelligent', en: 'Smart Review Pack' },
+                'pages': { ar: 'إضافة صفحة جديدة', fr: 'Ajouter une page', en: 'Add new page' },
+                'content': { ar: 'تحديث المحتوى', fr: 'Mise à jour contenu', en: 'Content update' },
+                'features': { ar: 'إضافة مميزات جديدة', fr: 'Ajouter des fonctionnalités', en: 'Add new features' },
+                'maintenance': { ar: 'صيانة شهرية', fr: 'Maintenance mensuelle', en: 'Monthly maintenance' }
+            };
+
+            // Toast messages per language
+            const toastMessages = {
+                'ar': { added: 'تم إضافة: ', removed: 'تم إلغاء: ', alert: 'الرجاء اختيار خدمة على الأقل' },
+                'fr': { added: 'Ajouté: ', removed: 'Supprimé: ', alert: 'Veuillez sélectionner au moins un service' },
+                'en': { added: 'Added: ', removed: 'Removed: ', alert: 'Please select at least one service' }
+            };
+
+            const whatsappMessages = {
+                'ar': {
+                    greeting: 'مرحباً، أرغب في الحصول على عرض سعر للخدمات التالية:\n\n',
+                    empty: '⚠️ لم يتم اختيار أي خدمة بعد.\n',
+                    total: 'المجموع التقديري',
+                    currency: 'درهم',
+                    closing: '\n\nأرجو إرسال التفاصيل الكاملة وشكراً.'
+                },
+                'fr': {
+                    greeting: 'Bonjour, je souhaite obtenir un devis pour les services suivants :\n\n',
+                    empty: '⚠️ Aucun service sélectionné pour le moment.\n',
+                    total: 'Total estimé',
+                    currency: 'MAD',
+                    closing: '\n\nMerci de m\'envoyer les détails complets.'
+                },
+                'en': {
+                    greeting: 'Hello, I would like to get a quote for the following services:\n\n',
+                    empty: '⚠️ No services selected yet.\n',
+                    total: 'Estimated Total',
+                    currency: 'MAD',
+                    closing: '\n\nPlease send me the full details. Thank you.'
+                }
+            };
+
+            let selectedServices = [];
+
+            // ---- Update summary ----
+            function updateSummary() {
+                const total = selectedServices.reduce((sum, s) => sum + s.price, 0);
+                const totalEl = document.getElementById('totalPrice');
+                if (totalEl) totalEl.textContent = total;
+
+                const list = document.getElementById('selectedList');
+                if (!list) return;
+                list.innerHTML = '';
+                selectedServices.forEach((s, index) => {
+                    const span = document.createElement('span');
+                    span.className = 'builder-selected-item';
+                    const name = serviceLabels[s.id]?.[currentLang] || s.id;
+                    span.innerHTML = name + ' <span class="remove-btn" data-index="' + index + '"><i class="fas fa-times"></i></span>';
+                    list.appendChild(span);
+                });
+
+                document.querySelectorAll('.builder-selected-item .remove-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const idx = parseInt(this.dataset.index);
+                        const serviceId = selectedServices[idx].id;
+                        selectedServices.splice(idx, 1);
+                        document.querySelectorAll('.builder-option').forEach(opt => {
+                            if (opt.dataset.service === serviceId) {
+                                opt.classList.remove('selected');
+                            }
+                        });
+                        const name = serviceLabels[serviceId]?.[currentLang] || serviceId;
+                        const msg = toastMessages[currentLang]?.removed || 'Removed: ';
+                        showToast('❌ ' + msg, msg + name, 'fa-times');
+                        updateSummary();
+                    });
+                });
+            }
+
+            // ---- Build WhatsApp message ----
+            function buildWhatsAppMessage() {
+                const msgs = whatsappMessages[currentLang] || whatsappMessages['ar'];
+                let message = msgs.greeting;
+
+                if (selectedServices.length === 0) {
+                    message += msgs.empty;
+                } else {
+                    let total = 0;
+                    selectedServices.forEach(s => {
+                        const name = serviceLabels[s.id]?.[currentLang] || s.id;
+                        message += '  ✓ ' + name + ' (' + s.price + ' ' + msgs.currency + ')\n';
+                        total += s.price;
+                    });
+                    message += '\n📊 *' + msgs.total + ': ' + total + ' ' + msgs.currency + '*';
+                }
+
+                message += msgs.closing;
+                return encodeURIComponent(message);
+            }
+
+            function sendWhatsAppMessage() {
+                const message = buildWhatsAppMessage();
+                const url = baseUrl + '?text=' + message;
+                window.open(url, '_blank');
+            }
+
+            function setLanguage(lang) {
+                currentLang = lang;
+                langOptions.forEach(opt => {
+                    opt.classList.toggle('active', opt.dataset.langValue === lang);
+                });
+                langSelected.querySelectorAll('span').forEach(el => {
+                    el.classList.toggle('active', el.dataset.lang === lang);
+                });
+                allLangElements.forEach(el => {
+                    el.classList.toggle('active', el.dataset.lang === lang);
+                });
+                const html = document.documentElement;
+                if (lang === 'ar') {
+                    html.setAttribute('dir', 'rtl');
+                    html.setAttribute('lang', 'ar');
+                    document.body.classList.add('rtl');
+                } else {
+                    html.setAttribute('dir', 'ltr');
+                    html.setAttribute('lang', lang);
+                    document.body.classList.remove('rtl');
+                }
+                langDropdown.classList.remove('open');
+                document.getElementById('navLinks').classList.remove('open');
+
+                // Re-render selected services with current language
+                updateSummary();
+            }
+
+            langSelected.addEventListener('click', function(e) {
+                e.stopPropagation();
+                langDropdown.classList.toggle('open');
+            });
+
+            langOptions.forEach(opt => {
+                opt.addEventListener('click', function() {
+                    setLanguage(this.dataset.langValue);
+                });
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!langDropdown.contains(e.target)) {
+                    langDropdown.classList.remove('open');
+                }
+            });
+
+            // ---- Mobile Menu ----
+            const hamburger = document.getElementById('hamburger');
+            const navLinksContainer = document.getElementById('navLinks');
+
+            hamburger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navLinksContainer.classList.toggle('open');
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            navLinksContainer.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinksContainer.classList.remove('open');
+                    const icon = hamburger.querySelector('i');
+                    if (icon) {
+                        icon.classList.add('fa-bars');
+                        icon.classList.remove('fa-times');
+                    }
+                });
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!navLinksContainer.contains(e.target) && !hamburger.contains(e.target)) {
+                    navLinksContainer.classList.remove('open');
+                    const icon = hamburger.querySelector('i');
+                    if (icon) {
+                        icon.classList.add('fa-bars');
+                        icon.classList.remove('fa-times');
+                    }
+                }
+            });
+
+            // ---- Sticky Navbar ----
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                navbar.classList.toggle('scrolled', window.scrollY > 20);
+            });
+
+            // ============================================================
+            // TOAST NOTIFICATION SYSTEM
+            // ============================================================
+            const toast = document.getElementById('toast');
+            const toastTitle = document.getElementById('toastTitle');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastClose = document.getElementById('toastClose');
+            let toastTimeout = null;
+
+            function showToast(title, message, icon = 'fa-check') {
+                if (toastTimeout) {
+                    clearTimeout(toastTimeout);
+                }
+                toastTitle.textContent = title;
+                toastMessage.textContent = message;
+                const iconEl = toast.querySelector('.toast-icon i');
+                iconEl.className = 'fas ' + icon;
+                toast.classList.add('show');
+                toastTimeout = setTimeout(function() {
+                    toast.classList.remove('show');
+                    toastTimeout = null;
+                }, 3500);
+            }
+
+            toastClose.addEventListener('click', function() {
+                toast.classList.remove('show');
+                if (toastTimeout) {
+                    clearTimeout(toastTimeout);
+                    toastTimeout = null;
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (toast.classList.contains('show') && !toast.contains(e.target)) {
+                    toast.classList.remove('show');
+                    if (toastTimeout) {
+                        clearTimeout(toastTimeout);
+                        toastTimeout = null;
+                    }
+                }
+            });
+
+            // ---- Option click handler ----
+            document.querySelectorAll('.builder-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const serviceId = this.dataset.service;
+                    const price = parseInt(this.dataset.price);
+                    const index = selectedServices.findIndex(s => s.id === serviceId);
+
+                    if (index > -1) {
+                        // Remove service
+                        selectedServices.splice(index, 1);
+                        this.classList.remove('selected');
+                        const name = serviceLabels[serviceId]?.[currentLang] || serviceId;
+                        const msg = toastMessages[currentLang]?.removed || 'Removed: ';
+                        showToast('❌ ' + msg, msg + name, 'fa-times');
+                    } else {
+                        // Add service
+                        const websiteServices = ['basic', 'professional', 'premium'];
+                        if (websiteServices.includes(serviceId)) {
+                            document.querySelectorAll('.builder-option').forEach(opt => {
+                                if (websiteServices.includes(opt.dataset.service)) {
+                                    opt.classList.remove('selected');
+                                    const idx = selectedServices.findIndex(s => s.id === opt.dataset
+                                        .service);
+                                    if (idx > -1) selectedServices.splice(idx, 1);
+                                }
+                            });
+                        }
+                        selectedServices.push({ id: serviceId, price: price });
+                        this.classList.add('selected');
+                        const name = serviceLabels[serviceId]?.[currentLang] || serviceId;
+                        const msg = toastMessages[currentLang]?.added || 'Added: ';
+                        showToast('✅ ' + msg, msg + name, 'fa-plus-circle');
+                    }
+
+                    updateSummary();
+                });
+            });
+
+            // ---- Attach WhatsApp buttons ----
+            document.getElementById('builderWhatsAppBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (selectedServices.length === 0) {
+                    const msg = toastMessages[currentLang]?.alert || 'Please select at least one service';
+                    showToast('⚠️ تنبيه', msg, 'fa-exclamation-triangle');
+                    return;
+                }
+                sendWhatsAppMessage();
+            });
+
+            document.getElementById('mainWhatsAppBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (selectedServices.length === 0) {
+                    const msg = toastMessages[currentLang]?.alert || 'Please select at least one service';
+                    showToast('⚠️ تنبيه', msg, 'fa-exclamation-triangle');
+                    return;
+                }
+                sendWhatsAppMessage();
+            });
+
+            document.getElementById('floatWhatsAppBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (selectedServices.length === 0) {
+                    const msg = toastMessages[currentLang]?.alert || 'Please select at least one service';
+                    showToast('⚠️ تنبيه', msg, 'fa-exclamation-triangle');
+                    return;
+                }
+                sendWhatsAppMessage();
+            });
+
+            // ---- Init Language ----
+            setLanguage('ar');
+
+            console.log('✅ Global Builder ready with multi-language support!');
+            console.log('💡 Select services to build your custom package.');
+        })();
+    </script>
+</body>
+</html>
