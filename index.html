@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YanCode — Premium Digital Agency</title>
+    <link rel="icon" href="icon.png" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="custom.css?v1">
+</head>
+<body>
+
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div class="toast-container" id="toastContainer">
+        <div class="toast" id="toast">
+            <div class="toast-icon"><i class="fas fa-check"></i></div>
+            <div class="toast-content">
+                <span class="toast-title" id="toastTitle">تمت الإضافة</span>
+                <span class="toast-message" id="toastMessage">تم إضافة الخدمة بنجاح</span>
+            </div>
+            <button class="toast-close" id="toastClose"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; width: 100%;">
+            <div class="navbar-left">
+                <a href="#" class="logo">
+                    <div>YanCode</div>
+                    <small data-lang="ar" class="active">مواقع عصريّة لأعمالك</small>
+                    <small data-lang="fr">Sites modernes pour Vous.</small>
+                    <small data-lang="en">Modern Websites for You.</small>
+                </a>
+                <div class="lang-dropdown" id="langDropdown">
+                    <div class="selected" id="langSelected">
+                        <i class="fas fa-globe"></i>
+                        <span data-lang="ar" class="active">عربي</span>
+                        <span data-lang="fr">FR</span>
+                        <span data-lang="en">EN</span>
+                        <span class="arrow"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="menu">
+                        <div class="option active" data-lang-value="ar"><i class="fas fa-check"></i> عربي</div>
+                        <div class="option" data-lang-value="fr"><i class="fas fa-check"></i> Français</div>
+                        <div class="option" data-lang-value="en"><i class="fas fa-check"></i> English</div>
+                    </div>
+                </div>
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#services" data-lang="ar" class="active">خدماتنا</a><a href="#services" data-lang="fr">Services</a><a href="#services" data-lang="en">Services</a></li>
+                <li><a href="#builder" data-lang="ar" class="active">بناء باقات</a><a href="#builder" data-lang="fr">Créez votre offre</a><a href="#builder" data-lang="en">Build Your Package</a></li>
+                <li><a href="#contact" data-lang="ar" class="active">تواصل</a><a href="#contact" data-lang="fr">Contact</a><a href="#contact" data-lang="en">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- ===== HERO ===== -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="badge"><i class="fas fa-crown" style="margin-left:8px;"></i>
+                    <span data-lang="ar" class="active"> حضور رقمي فاخر</span>
+                    <span data-lang="fr"> Présence numérique premium</span>
+                    <span data-lang="en"> Premium Digital Presence</span>
+                </div>
+
+                <h1 data-lang="ar" class="active">موقع إلكتروني <span class="highlight">عصري</span> لأعمالك</h1>
+                <h1 data-lang="fr">Site web <span class="highlight">moderne</span> pour vous.</h1>
+                <h1 data-lang="en">A <span class="highlight">modern</span> website for you.</h1>
+
+                <p data-lang="ar" class="active">YanCode يصنع هويتك الرقمية بأناقة احترافية</p>
+                <p data-lang="fr">YanCode crée votre identité numérique avec une élégance professionnelle</p>
+                <p data-lang="en">YanCode crafts your digital identity with professional elegance</p>
+
+                <div class="hero-actions">
+                    <a href="#builder" class="btn-primary"><i class="fas fa-rocket"></i> <span data-lang="ar" class="active">ابني باقاتك</span><span data-lang="fr">Créez votre offre</span><span data-lang="en">Build Your Package</span></a>
+                    <a href="#contact" class="btn-outline"><i class="fas fa-phone"></i> <span data-lang="ar" class="active">تواصل</span><span data-lang="fr">Contact</span><span data-lang="en">Contact</span></a>
+                </div>
+
+                <div class="hero-stats">
+                    <div><i class="fas fa-check-circle"></i> <span data-lang="ar" class="active">50+ مشروع</span><span data-lang="fr">50+ projets</span><span data-lang="en">50+ projects</span></div>
+                    <div><i class="fas fa-star"></i> <span data-lang="ar" class="active">4.9 / 5 تقييم</span><span data-lang="fr">4.9 / 5 avis</span><span data-lang="en">4.9 / 5 rating</span></div>
+                </div>
+            </div>
+
+            <div class="hero-description-box">
+                <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                <blockquote>
+                    <span data-lang="ar" class="active">
+                        "نصنع <span class="highlight">هويتك الرقمية</span> بأناقة واحترافية،
+                        لأن موقعك الإلكتروني هو <span class="highlight">انطباعك الأول</span> أمام عملائك."
+                    </span>
+                    <span data-lang="fr">
+                        "Nous créons votre <span class="highlight">identité numérique</span> avec élégance et professionnalisme,
+                        car votre site web est votre <span class="highlight">première impression</span>."
+                    </span>
+                    <span data-lang="en">
+                        "We craft your <span class="highlight">digital identity</span> with elegance and professionalism,
+                        because your website is your <span class="highlight">first impression</span>."
+                    </span>
+                </blockquote>
+                <div class="author">
+                    <div class="avatar">Y</div>
+                    <div class="info">
+                        <strong>YanCode</strong>
+                        <span data-lang="ar" class="active">حلول رقمية مبتكرة</span>
+                        <span data-lang="fr">Solutions numériques innovantes</span>
+                        <span data-lang="en">Innovative digital solutions</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TRUSTED BY ===== -->
+        <section class="trusted fade-up">
+            <div class="container">
+                <span class="label" data-lang="ar" class="active">موثوق من قبل</span>
+                <span class="label" data-lang="fr">Approuvé par</span>
+                <span class="label" data-lang="en">Trusted by</span>
+                <div class="logos">
+                    <span>✦ 50+ Startups</span>
+                    <span>✦ 30+ Agencies</span>
+                    <span>✦ 20+ E-commerces</span>
+                    <span>✦ 15+ Restaurants</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SERVICES ===== -->
+        <section id="services">
+            <div class="section-header fade-up">
+                <!-- <span class="section-badge"><i class="fas fa-cube"></i> Services</span> -->
+                <h2 class="section-title" data-lang="ar" class="active">خدماتنا <span class="highlight">الرقمية</span></h2>
+                <h2 class="section-title" data-lang="fr">Nos <span class="highlight">services</span></h2>
+                <h2 class="section-title" data-lang="en">Our <span class="highlight">services</span></h2>
+                <span class="section-subtitle" data-lang="ar" class="active">حلول متكاملة لنجاح أعمالك</span>
+                <span class="section-subtitle" data-lang="fr">Des solutions complètes pour votre succès</span>
+                <span class="section-subtitle" data-lang="en">Complete solutions for your success</span>
+            </div>
+
+            <div class="services-grid stagger">
+                <div class="service-card"><i class="fas fa-globe"></i><h4 data-lang="ar" class="active">تصميم مواقع احترافية</h4><h4 data-lang="fr">Design de sites</h4><h4 data-lang="en">Web Design</h4><p data-lang="ar" class="active">أناقة ووظائف متكاملة</p><p data-lang="fr">Élégance et fonctionnalités</p><p data-lang="en">Elegance &amp; features</p></div>
+                <div class="service-card"><i class="fas fa-mobile-alt"></i><h4 data-lang="ar" class="active">متوافق مع جميع الأجهزة</h4><h4 data-lang="fr">Responsive</h4><h4 data-lang="en">Fully Responsive</h4><p data-lang="ar" class="active">تجربة سلسة للجميع</p><p data-lang="fr">Expérience fluide</p><p data-lang="en">Seamless experience</p></div>
+                <div class="service-card"><i class="fas fa-bolt"></i><h4 data-lang="ar" class="active">سريع وآمن</h4><h4 data-lang="fr">Rapide et sécurisé</h4><h4 data-lang="en">Fast &amp; Secure</h4><p data-lang="ar" class="active">أداء مثالي وأمان عالي</p><p data-lang="fr">Performance et sécurité</p><p data-lang="en">Performance &amp; security</p></div>
+                <div class="service-card"><i class="fas fa-search"></i><h4 data-lang="ar" class="active">تحسين SEO</h4><h4 data-lang="fr">Optimisation SEO</h4><h4 data-lang="en">SEO Optimization</h4><p data-lang="ar" class="active">ظهور أفضل في البحث</p><p data-lang="fr">Meilleure visibilité</p><p data-lang="en">Better search visibility</p></div>
+                <div class="service-card"><i class="fas fa-server"></i><h4 data-lang="ar" class="active">استضافة مجانية</h4><h4 data-lang="fr">Hébergement gratuit</h4><h4 data-lang="en">Free Hosting</h4><p data-lang="ar" class="active">لمدة سنة كاملة</p><p data-lang="fr">Pour un an</p><p data-lang="en">For one year</p></div>
+                <div class="service-card"><i class="fas fa-expand-arrows-alt"></i><h4 data-lang="ar" class="active">قابل للتطوير</h4><h4 data-lang="fr">Évolutif</h4><h4 data-lang="en">Scalable</h4><p data-lang="ar" class="active">أضف مزايا مستقبلاً</p><p data-lang="fr">Ajoutez des fonctionnalités</p><p data-lang="en">Add features later</p></div>
+            </div>
+        </section>
+
+        <!-- ===== WHY NEED WEBSITE ===== -->
+        <section class="why-section fade-up">
+            <div style="max-width:100%;">
+                <div class="section-header">
+                    <!-- <span class="section-badge"><i class="fas fa-question-circle"></i> Pourquoi</span> -->
+                    <h2 class="section-title" data-lang="ar" class="active">لماذا تحتاج إلى موقع إلكتروني؟</h2>
+                    <h2 class="section-title" data-lang="fr">Pourquoi avez-vous besoin d'un site web ?</h2>
+                    <h2 class="section-title" data-lang="en">Why do you need a website?</h2>
+                    <span class="section-subtitle" data-lang="ar" class="active">5 أسباب تجعل موقعك الإلكتروني ضرورة لأعمالك</span>
+                    <span class="section-subtitle" data-lang="fr">5 raisons pour lesquelles votre site web est essentiel</span>
+                    <span class="section-subtitle" data-lang="en">5 reasons why your website is essential for your business</span>
+                </div>
+
+                <div class="why-grid stagger">
+                    <div class="why-card"><div class="icon-wrap"><i class="fas fa-handshake"></i></div><h4 data-lang="ar" class="active">تعزيز ثقة العملاء</h4><h4 data-lang="fr">Renforcer la confiance</h4><h4 data-lang="en">Boost client trust</h4><p data-lang="ar" class="active">بناء علاقة ثقة مع عملائك</p><p data-lang="fr">Construire une relation de confiance</p><p data-lang="en">Build trust with your clients</p></div>
+                    <div class="why-card"><div class="icon-wrap"><i class="fas fa-clock"></i></div><h4 data-lang="ar" class="active">تواجد 24/7</h4><h4 data-lang="fr">Présence 24/7</h4><h4 data-lang="en">24/7 Presence</h4><p data-lang="ar" class="active">متاح دائماً لعملائك</p><p data-lang="fr">Disponible pour vos clients</p><p data-lang="en">Always available for your clients</p></div>
+                    <div class="why-card"><div class="icon-wrap"><i class="fas fa-users"></i></div><h4 data-lang="ar" class="active">وصول إلى عملاء جدد</h4><h4 data-lang="fr">Atteindre de nouveaux clients</h4><h4 data-lang="en">Reach new customers</h4><p data-lang="ar" class="active">توسيع قاعدة عملائك</p><p data-lang="fr">Élargir votre clientèle</p><p data-lang="en">Expand your customer base</p></div>
+                    <div class="why-card"><div class="icon-wrap"><i class="fas fa-briefcase"></i></div><h4 data-lang="ar" class="active">عرض احترافي</h4><h4 data-lang="fr">Présentation professionnelle</h4><h4 data-lang="en">Professional presentation</h4><p data-lang="ar" class="active">تقديم خدماتك بأفضل صورة</p><p data-lang="fr">Présenter vos services au mieux</p><p data-lang="en">Present your services at their best</p></div>
+                    <div class="why-card"><div class="icon-wrap"><i class="fas fa-google"></i></div><h4 data-lang="ar" class="active">ظهور على Google</h4><h4 data-lang="fr">Visibilité sur Google</h4><h4 data-lang="en">Google visibility</h4><p data-lang="ar" class="active">تحسين ظهورك في محركات البحث</p><p data-lang="fr">Améliorer votre visibilité</p><p data-lang="en">Improve your search visibility</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PROCESS ===== -->
+        <section class="process-section fade-up" id="process">
+            <div class="section-header">
+                <!-- <span class="section-badge"><i class="fas fa-route"></i> Process</span> -->
+                <h2 class="section-title" data-lang="ar" class="active">كيف <span class="highlight">نعمل</span></h2>
+                <h2 class="section-title" data-lang="fr">Comment <span class="highlight">nous travaillons</span></h2>
+                <h2 class="section-title" data-lang="en">How <span class="highlight">we work</span></h2>
+                <span class="section-subtitle" data-lang="ar" class="active">4 خطوات بسيطة لموقعك</span>
+                <span class="section-subtitle" data-lang="fr">4 étapes simples pour votre site</span>
+                <span class="section-subtitle" data-lang="en">4 simple steps to your website</span>
+            </div>
+            <div class="process-grid stagger">
+                <div class="process-step"><h4 data-lang="ar" class="active">استشارة</h4><h4 data-lang="fr">Consultation</h4><h4 data-lang="en">Consultation</h4><br><p data-lang="ar" class="active">نفهم احتياجاتك وأهدافك</p><p data-lang="fr">Comprendre vos besoins</p><p data-lang="en">Understand your needs</p></div>
+                <div class="process-step"><h4 data-lang="ar" class="active">تصميم</h4><h4 data-lang="fr">Design</h4><h4 data-lang="en">Design</h4><br><p data-lang="ar" class="active">نصمم واجهة جذابة</p><p data-lang="fr">Concevoir une interface</p><p data-lang="en">Design an interface</p></div>
+                <div class="process-step"><h4 data-lang="ar" class="active">تطوير</h4><h4 data-lang="fr">Développement</h4><h4 data-lang="en">Development</h4><br><p data-lang="ar" class="active">نبني موقعك بإتقان</p><p data-lang="fr">Développer votre site</p><p data-lang="en">Build your website</p></div>
+                <div class="process-step"><h4 data-lang="ar" class="active">إطلاق</h4><h4 data-lang="fr">Lancement</h4><h4 data-lang="en">Launch</h4><br><p data-lang="ar" class="active">نطلق موقعك للعالم</p><p data-lang="fr">Lancer votre site</p><p data-lang="en">Launch your website</p></div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        GLOBAL BUILDER SECTION
+        ============================================================ -->
+        <section id="builder" class="builder-section fade-up">
+            <div class="section-header">
+                <!-- <span class="section-badge"><i class="fas fa-cubes"></i> Builder</span> -->
+                <h2 class="section-title" data-lang="ar" class="active">ابني <span class="highlight">باقاتك</span></h2>
+                <h2 class="section-title" data-lang="fr">Créez <span class="highlight">votre offre</span></h2>
+                <h2 class="section-title" data-lang="en">Build <span class="highlight">your package</span></h2>
+                <span class="section-subtitle" data-lang="ar" class="active">اختر الخدمات التي تحتاجها واحصل على عرض سعر</span>
+                <span class="section-subtitle" data-lang="fr">Choisissez les services dont vous avez besoin</span>
+                <span class="section-subtitle" data-lang="en">Select the services you need</span>
+            </div>
+
+            <!-- Category 1: Website Creation -->
+            <div class="builder-category">
+                <div class="builder-category-title">
+                    <i class="fas fa-globe"></i>
+                    <span data-lang="ar" class="active">إنشاء الموقع الإلكتروني</span>
+                    <span data-lang="fr">Création de site web</span>
+                    <span data-lang="en">Website Creation</span>
+                </div>
+                <div class="builder-options">
+                    <div class="builder-option" data-service="basic" data-price="999">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">موقع تعريفي - أساسي</div>
+                        <div class="option-name" data-lang="fr">Site vitrine - Basique</div>
+                        <div class="option-name" data-lang="en">Showcase - Basic</div>
+                        <div class="option-price">999 <span data-lang="ar">درهم</span><span data-lang="fr">MAD</span><span data-lang="en">MAD</span></div>
+                        <div class="option-desc" data-lang="ar" class="active">3 صفحات · متجاوب · نموذج تواصل</div>
+                        <div class="option-desc" data-lang="fr">3 pages · Responsive · Formulaire</div>
+                        <div class="option-desc" data-lang="en">3 pages · Responsive · Contact form</div>
+                    </div>
+                    <div class="builder-option" data-service="professional" data-price="1999">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-star"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">موقع احترافي - متقدم</div>
+                        <div class="option-name" data-lang="fr">Site professionnel - Avancé</div>
+                        <div class="option-name" data-lang="en">Professional - Advanced</div>
+                        <div class="option-price">1999 <span data-lang="ar">درهم</span><span data-lang="fr">MAD</span><span data-lang="en">MAD</span></div>
+                        <div class="option-desc" data-lang="ar" class="active">5 صفحات · SEO · بريد إلكتروني · دعم</div>
+                        <div class="option-desc" data-lang="fr">5 pages · SEO · Email · Support</div>
+                        <div class="option-desc" data-lang="en">5 pages · SEO · Email · Support</div>
+                    </div>
+                    <div class="builder-option" data-service="premium" data-price="2999">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-crown"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">موقع متكامل - بريميوم</div>
+                        <div class="option-name" data-lang="fr">Site complet - Premium</div>
+                        <div class="option-name" data-lang="en">Complete - Premium</div>
+                        <div class="option-price">2999 <span data-lang="ar">درهم</span><span data-lang="fr">MAD</span><span data-lang="en">MAD</span></div>
+                        <div class="option-desc" data-lang="ar" class="active">10 صفحات · SEO متقدم · 5 بريد · 3 شهور دعم</div>
+                        <div class="option-desc" data-lang="fr">10 pages · SEO avancé · 5 emails · 3 mois support</div>
+                        <div class="option-desc" data-lang="en">10 pages · Advanced SEO · 5 emails · 3 months support</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 2: Identity Services -->
+            <div class="builder-category">
+                <div class="builder-category-title">
+                    <i class="fas fa-id-card"></i>
+                    <span data-lang="ar" class="active">خدمات الهوية الرقمية</span>
+                    <span data-lang="fr">Services d'identité numérique</span>
+                    <span data-lang="en">Digital Identity Services</span>
+                </div>
+                <div class="builder-options">
+                    <div class="builder-option" data-service="logo" data-price="399">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-paint-brush"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">تصميم شعار احترافي</div>
+                        <div class="option-name" data-lang="fr">Création de logo professionnel</div>
+                        <div class="option-name" data-lang="en">Professional Logo Design</div>
+                        <div class="option-price">399 <span data-lang="ar">درهم</span><span data-lang="fr">MAD</span><span data-lang="en">MAD</span></div>
+                        <div class="option-desc" data-lang="ar" class="active">شعار مميز + 3 تعديلات</div>
+                        <div class="option-desc" data-lang="fr">Logo distinctif + 3 révisions</div>
+                        <div class="option-desc" data-lang="en">Distinctive logo + 3 revisions</div>
+                    </div>
+                    <div class="builder-option" data-service="google" data-price="249">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fab fa-google"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">هوية Google Business</div>
+                        <div class="option-name" data-lang="fr">Identité Google Business</div>
+                        <div class="option-name" data-lang="en">Google Business Identity</div>
+                        <div class="option-price">249 <span data-lang="ar">درهم</span><span data-lang="fr">MAD</span><span data-lang="en">MAD</span></div>
+                        <div class="option-desc" data-lang="ar" class="active">تهيئة كاملة + إدارة أولية</div>
+                        <div class="option-desc" data-lang="fr">Configuration complète + gestion initiale</div>
+                        <div class="option-desc" data-lang="en">Full setup + initial management</div>
+                    </div>
+                    <div class="builder-option" data-service="review" data-price="149">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-qrcode"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">باقة التقييمات الذكية</div>
+                        <div class="option-name" data-lang="fr">Pack Avis Intelligent</div>
+                        <div class="option-name" data-lang="en">Smart Review Pack</div>
+                        <div class="option-price">149 <span data-lang="ar">درهم</span><span data-lang="fr">MAD</span><span data-lang="en">MAD</span></div>
+                        <div class="option-desc" data-lang="ar" class="active">رمز QR · نظام تقييم</div>
+                        <div class="option-desc" data-lang="fr">QR code · Système d'avis</div>
+                        <div class="option-desc" data-lang="en">QR code · Review system</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 3: Maintenance & Extras -->
+            <div class="builder-category">
+                <div class="builder-category-title">
+                    <i class="fas fa-tools"></i>
+                    <span data-lang="ar" class="active">الصيانة والخدمات الإضافية</span>
+                    <span data-lang="fr">Maintenance et services supplémentaires</span>
+                    <span data-lang="en">Maintenance & Additional Services</span>
+                </div>
+                <div class="builder-options">
+                    <div class="builder-option" data-service="pages" data-price="149">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-plus-circle"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">إضافة صفحة جديدة</div>
+                        <div class="option-name" data-lang="fr">Ajouter une page</div>
+                        <div class="option-name" data-lang="en">Add new page</div>
+                        <div class="option-price">149 <span data-lang="ar">درهم</span><span data-lang="fr">MAD</span><span data-lang="en">MAD</span></div>
+                        <div class="option-desc" data-lang="ar" class="active">صفحة واحدة بتصميم احترافي</div>
+                        <div class="option-desc" data-lang="fr">Une page avec design professionnel</div>
+                        <div class="option-desc" data-lang="en">One page with professional design</div>
+                    </div>
+                    <div class="builder-option" data-service="content" data-price="79">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-sync-alt"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">تحديث المحتوى</div>
+                        <div class="option-name" data-lang="fr">Mise à jour du contenu</div>
+                        <div class="option-name" data-lang="en">Content update</div>
+                        <div class="option-price">79 <span data-lang="ar">درهم</span><span data-lang="fr">MAD</span><span data-lang="en">MAD</span></div>
+                        <div class="option-desc" data-lang="ar" class="active">تحديث النصوص والصور</div>
+                        <div class="option-desc" data-lang="fr">Mise à jour des textes et images</div>
+                        <div class="option-desc" data-lang="en">Update text and images</div>
+                    </div>
+                    <div class="builder-option" data-service="features" data-price="199">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-puzzle-piece"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">إضافة مميزات جديدة</div>
+                        <div class="option-name" data-lang="fr">Ajouter des fonctionnalités</div>
+                        <div class="option-name" data-lang="en">Add new features</div>
+                        <div class="option-price">199 <span data-lang="ar">درهم</span><span data-lang="fr">MAD</span><span data-lang="en">MAD</span></div>
+                        <div class="option-desc" data-lang="ar" class="active">وظيفة جديدة حسب الطلب</div>
+                        <div class="option-desc" data-lang="fr">Fonctionnalité sur mesure</div>
+                        <div class="option-desc" data-lang="en">Custom feature</div>
+                    </div>
+                    <div class="builder-option" data-service="maintenance" data-price="99">
+                        <div class="option-check"><i class="fas fa-check"></i></div>
+                        <div class="option-icon"><i class="fas fa-tools"></i></div>
+                        <div class="option-name" data-lang="ar" class="active">صيانة شهرية</div>
+                        <div class="option-name" data-lang="fr">Maintenance mensuelle</div>
+                        <div class="option-name" data-lang="en">Monthly maintenance</div>
+                        <div class="option-price">99 <span data-lang="ar">درهم/شهر</span><span data-lang="fr">MAD/ mois</span><span data-lang="en">MAD/month</span></div>
+                        <div class="option-desc" data-lang="ar" class="active">تحديثات · نسخ احتياطي · أمان</div>
+                        <div class="option-desc" data-lang="fr">Mises à jour · Sauvegarde · Sécurité</div>
+                        <div class="option-desc" data-lang="en">Updates · Backup · Security</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Builder Summary -->
+            <div class="builder-summary">
+                <div class="builder-total">
+                    <span class="total-label" data-lang="ar" class="active">المجموع التقديري</span>
+                    <span class="total-label" data-lang="fr">Total estimé</span>
+                    <span class="total-label" data-lang="en">Estimated Total</span>
+                    <span class="total-price" id="totalPrice">0</span>
+                    <span data-lang="ar">درهم</span><span data-lang="fr">MAD</span><span data-lang="en">MAD</span>
+                </div>
+                <div class="builder-selected-list" id="selectedList"></div>
+                <div class="builder-actions">
+                    <a href="#" class="btn-whatsapp" id="builderWhatsAppBtn" style="padding: 12px 32px; font-size: 0.85rem;">
+                        <i class="fab fa-whatsapp"></i>
+                        <span data-lang="ar" class="active">طلب عرض السعر</span>
+                        <span data-lang="fr">Demander un devis</span>
+                        <span data-lang="en">Request Quote</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TESTIMONIALS ===== -->
+        <section class="testimonials-section fade-up" id="testimonials">
+            <div class="section-header">
+                <!-- <span class="section-badge"><i class="fas fa-star"></i> Reviews</span> -->
+                <h2 class="section-title" data-lang="ar" class="active">آراء <span class="highlight">العملاء</span></h2>
+                <h2 class="section-title" data-lang="fr">Avis <span class="highlight">clients</span></h2>
+                <h2 class="section-title" data-lang="en">Client <span class="highlight">reviews</span></h2>
+                <span class="section-subtitle" data-lang="ar" class="active">ما يقوله عملاؤنا عنا</span>
+                <span class="section-subtitle" data-lang="fr">Ce que nos clients disent</span>
+                <span class="section-subtitle" data-lang="en">What our clients say</span>
+            </div>
+            <div class="testimonial-grid stagger">
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <blockquote data-lang="ar" class="active">"موقع ممتاز وسريع. YanCode غيروا شكل أعمالنا بالكامل."</blockquote>
+                    <blockquote data-lang="fr">"Site excellent et rapide. YanCode a transformé notre activité."</blockquote>
+                    <blockquote data-lang="en">"Excellent and fast website. YanCode transformed our business."</blockquote>
+                    <div class="author"><div class="avatar">A</div><div class="info"><div class="name">Ahmed</div><div class="role" data-lang="ar" class="active">مؤسس شركة</div><div class="role" data-lang="fr">Fondateur</div><div class="role" data-lang="en">Founder</div></div></div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <blockquote data-lang="ar" class="active">"احترافية في التصميم والتنفيذ. أنصح بهم بشدة."</blockquote>
+                    <blockquote data-lang="fr">"Professionnalisme dans le design et l'exécution. Je les recommande."</blockquote>
+                    <blockquote data-lang="en">"Professional design and execution. Highly recommend."</blockquote>
+                    <div class="author"><div class="avatar">S</div><div class="info"><div class="name">Sarah</div><div class="role" data-lang="ar" class="active">مديرة تسويق</div><div class="role" data-lang="fr">Responsable marketing</div><div class="role" data-lang="en">Marketing Manager</div></div></div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <blockquote data-lang="ar" class="active">"خدمة ممتازة ودعم متواصل. موقعي يتفوق على المنافسين."</blockquote>
+                    <blockquote data-lang="fr">"Excellent service et support continu. Mon site dépasse les concurrents."</blockquote>
+                    <blockquote data-lang="en">"Great service and ongoing support. My site outshines competitors."</blockquote>
+                    <div class="author"><div class="avatar">M</div><div class="info"><div class="name">Mohamed</div><div class="role" data-lang="ar" class="active">صاحب متجر</div><div class="role" data-lang="fr">Propriétaire de boutique</div><div class="role" data-lang="en">Store Owner</div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        FAQ SECTION - REDESIGNED
+        ============================================================ -->
+        <section class="faq-section fade-up" id="faq">
+            <div class="container">
+                <div class="section-header">
+                    <!-- <span class="section-badge"><i class="fas fa-question-circle"></i> FAQ</span> -->
+                    <h2 class="section-title" data-lang="ar" class="active">أسئلة <span class="highlight">شائعة</span></h2>
+                    <h2 class="section-title" data-lang="fr">Foire aux <span class="highlight">questions</span></h2>
+                    <h2 class="section-title" data-lang="en">Frequently <span class="highlight">asked</span></h2>
+                    <span class="section-subtitle" data-lang="ar" class="active">أجوبة على أكثر الأسئلة تكراراً</span>
+                    <span class="section-subtitle" data-lang="fr">Réponses aux questions les plus fréquentes</span>
+                    <span class="section-subtitle" data-lang="en">Answers to the most frequently asked questions</span>
+                </div>
+
+                <div class="faq-grid">
+                    <!-- FAQ 1 -->
+                    <div class="faq-card open">
+                        <div class="faq-number">01</div>
+                        <div class="faq-question">
+                            <span class="q-text" data-lang="ar" class="active">كم تكلفة الموقع؟</span>
+                            <span class="q-text" data-lang="fr">Combien coûte un site ?</span>
+                            <span class="q-text" data-lang="en">How much does a website cost?</span>
+                            <span class="q-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="faq-answer" data-lang="ar" class="active">التكلفة تبدأ من 999 درهم وتعتمد على الخدمات التي تختارها في باقة البناء. يمكنك استخدام أداة بناء الباقات أعلاه للحصول على عرض سعر مخصص.</div>
+                        <div class="faq-answer" data-lang="fr">Le prix commence à 999 MAD et dépend des services que vous choisissez. Utilisez l'outil de création d'offres ci-dessus pour obtenir un devis personnalisé.</div>
+                        <div class="faq-answer" data-lang="en">The price starts at 999 MAD and depends on the services you choose. Use the package builder above to get a custom quote.</div>
+                        <span class="faq-tag" data-lang="ar" class="active">السعر</span>
+                        <span class="faq-tag" data-lang="fr">Prix</span>
+                        <span class="faq-tag" data-lang="en">Price</span>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="faq-card">
+                        <div class="faq-number">02</div>
+                        <div class="faq-question">
+                            <span class="q-text" data-lang="ar" class="active">كم من الوقت يستغرق إنجاز الموقع؟</span>
+                            <span class="q-text" data-lang="fr">Combien de temps pour créer le site ?</span>
+                            <span class="q-text" data-lang="en">How long does it take to build the site?</span>
+                            <span class="q-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="faq-answer" data-lang="ar" class="active">عادةً من 7 إلى 14 يوم حسب تعقيد المشروع. نعمل بكفاءة لضمان تسليم موقعك في أقرب وقت ممكن دون التضحية بالجودة.</div>
+                        <div class="faq-answer" data-lang="fr">Généralement 7 à 14 jours selon la complexité. Nous travaillons efficacement pour vous livrer votre site le plus rapidement possible sans compromettre la qualité.</div>
+                        <div class="faq-answer" data-lang="en">Usually 7 to 14 days depending on complexity. We work efficiently to deliver your site as quickly as possible without compromising quality.</div>
+                        <span class="faq-tag" data-lang="ar" class="active">المدة</span>
+                        <span class="faq-tag" data-lang="fr">Délai</span>
+                        <span class="faq-tag" data-lang="en">Timeline</span>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="faq-card">
+                        <div class="faq-number">03</div>
+                        <div class="faq-question">
+                            <span class="q-text" data-lang="ar" class="active">هل تقدمون دعمًا بعد الإطلاق؟</span>
+                            <span class="q-text" data-lang="fr">Offrez-vous un support après le lancement ?</span>
+                            <span class="q-text" data-lang="en">Do you offer support after launch?</span>
+                            <span class="q-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="faq-answer" data-lang="ar" class="active">نعم، نقدم دعم فني لمدة 3 شهور مع إمكانية الاشتراك في صيانة شهرية. نساعدك في أي تحديثات أو تعديلات تحتاجها.</div>
+                        <div class="faq-answer" data-lang="fr">Oui, nous offrons un support technique pendant 3 mois avec possibilité de maintenance mensuelle. Nous vous aidons pour toutes les mises à jour ou modifications nécessaires.</div>
+                        <div class="faq-answer" data-lang="en">Yes, we offer technical support for 3 months with optional monthly maintenance. We help you with any updates or modifications you need.</div>
+                        <span class="faq-tag" data-lang="ar" class="active">الدعم</span>
+                        <span class="faq-tag" data-lang="fr">Support</span>
+                        <span class="faq-tag" data-lang="en">Support</span>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="faq-card">
+                        <div class="faq-number">04</div>
+                        <div class="faq-question">
+                            <span class="q-text" data-lang="ar" class="active">هل الموقع متوافق مع الهواتف؟</span>
+                            <span class="q-text" data-lang="fr">Le site est-il compatible avec les mobiles ?</span>
+                            <span class="q-text" data-lang="en">Is the site mobile-friendly?</span>
+                            <span class="q-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="faq-answer" data-lang="ar" class="active">نعم، جميع مواقعنا متجاوبة بالكامل مع جميع الأجهزة. نوفر تجربة ممتازة على الهواتف والأجهزة اللوحية والحواسيب.</div>
+                        <div class="faq-answer" data-lang="fr">Oui, tous nos sites sont entièrement responsives. Nous offrons une excellente expérience sur mobiles, tablettes et ordinateurs.</div>
+                        <div class="faq-answer" data-lang="en">Yes, all our sites are fully responsive. We provide an excellent experience on phones, tablets, and computers.</div>
+                        <span class="faq-tag" data-lang="ar" class="active">التوافق</span>
+                        <span class="faq-tag" data-lang="fr">Compatibilité</span>
+                        <span class="faq-tag" data-lang="en">Compatibility</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== REVIEW BANNER ===== -->
+        <div class="review-banner fade-up">
+            <div class="review-content">
+                <div class="review-badge"><i class="fas fa-star" style="margin-left:6px;"></i>
+                    <span data-lang="ar" class="active"> تقييم العملاء</span>
+                    <span data-lang="fr">Avis clients</span>
+                    <span data-lang="en">Client Reviews</span>
+                </div>
+                <br>
+                <h3 data-lang="ar" class="active">شاركنا رأيك بسهولة</h3>
+                <h3 data-lang="fr">Partagez votre avis facilement</h3>
+                <h3 data-lang="en">Share your review easily</h3>
+                <br>
+                <p data-lang="ar" class="active">امسح رمز QR للمشاركة بتقييمك السريع. رأيك يساعدنا على التطور ويُظهر للآخرين جودة خدماتنا.</p>
+                <p data-lang="fr">Scannez le QR code pour partager votre avis rapide. Votre retour nous aide à évoluer et montre la qualité de nos services.</p>
+                <p data-lang="en">Scan the QR code to share your quick review. Your feedback helps us grow and shows others the quality of our services.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <span class="rating-text" data-lang="ar" class="active">4.9/5 من 50+ تقييم</span>
+                <span class="rating-text" data-lang="fr">4.9/5 de 50+ avis</span>
+                <span class="rating-text" data-lang="en">4.9/5 from 50+ reviews</span>
+            </div>
+
+            <div class="qr-wrapper">
+                <div class="qr-box">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <span class="qr-label"><i class="fas fa-camera"></i> <span data-lang="ar" class="active">امسح للمشاركة</span><span data-lang="fr">Scannez pour partager</span><span data-lang="en">Scan to share</span></span>
+            </div>
+        </div>
+
+        <!-- ===== CONTACT CTA ===== -->
+        <section id="contact" class="cta-section fade-up">
+            <h2>
+                <span data-lang="ar" class="active">جاهز لموقعك <span class="highlight">الجديد</span>؟</span>
+                <span data-lang="fr">Prêt pour votre <span class="highlight">nouveau site</span> ?</span>
+                <span data-lang="en">Ready for your <span class="highlight">new website</span>?</span>
+            </h2>
+            <p class="sub" data-lang="ar" class="active">تواصل معنا اليوم واحصل على موقع إلكتروني عصري لأعمالك</p>
+            <p class="sub" data-lang="fr">Contactez-nous dès aujourd'hui et obtenez un site web moderne</p>
+            <p class="sub" data-lang="en">Contact us today and get a modern website for your business</p>
+            <a href="#" class="cta-whatsapp" id="mainWhatsAppBtn">
+                <i class="fab fa-whatsapp"></i>
+                <span data-lang="ar" class="active">أرسل لنا على واتساب</span>
+                <span data-lang="fr">Envoyez-nous un WhatsApp</span>
+                <span data-lang="en">Send us a WhatsApp</span>
+            </a>
+            <p class="cta-phone"><i class="fas fa-phone-alt"></i> +212 704-771336</p>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer>
+            <div><span class="brand">Yan<span style="color:var(--teal);">Code</span></span> © 2026 · <span data-lang="ar" class="active">مواقع عصريّة لأعمالك</span><span data-lang="fr">Sites modernes</span><span data-lang="en">Modern Websites</span></div>
+            <div class="social">
+                <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ===== FLOATING WHATSAPP ===== -->
+    <a href="#" class="whatsapp-float" id="floatWhatsAppBtn" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <script src="custom.js?v1"></script>
+
+</body>
+</html>
