@@ -2,55 +2,166 @@
     'use strict';
 
     // ============================================================
+    // CONFIG
+    // ============================================================
+    const LANGS = ['fr', 'ar', 'en'];
+    const DEFAULT_LANG = 'fr';
+    const STORAGE_KEY = 'yancode-lang';
+    const phoneNumber = '212704771336';
+    const baseUrl = 'https://wa.me/' + phoneNumber;
+    // Set to your Google review link (Google Business Profile > "Ask for reviews").
+    // While empty, the QR code opens a WhatsApp chat to leave a review.
+    const REVIEW_URL = '';
+    const WEBSITE_SERVICES = ['basic', 'professional', 'premium'];
+
+    const i18n = {
+        fr: {
+            title: 'YanCode — Sites web modernes pour votre entreprise',
+            description: 'YanCode crée des sites web modernes, rapides et optimisés SEO au Maroc. Sites vitrines dès 850 MAD, logo, Google Business et maintenance. Devis gratuit sur WhatsApp.',
+            added: 'Ajouté',
+            removed: 'Retiré',
+            alertTitle: 'Attention',
+            alert: 'Veuillez sélectionner au moins un service',
+            remove: 'Retirer',
+            currency: 'MAD',
+            perMonth: 'MAD/mois',
+            greeting: 'Bonjour, je souhaite obtenir un devis pour :\n\n',
+            total: 'Total estimé',
+            closing: '\n\nMerci de m\'envoyer les détails.',
+            contact: 'Bonjour, je souhaite avoir plus d\'informations sur vos services.',
+            review: 'Bonjour, je souhaite laisser un avis sur YanCode : ',
+            qrLabel: 'QR code pour laisser un avis'
+        },
+        ar: {
+            title: 'YanCode — مواقع إلكترونية عصرية لأعمالك',
+            description: 'YanCode تصمم مواقع إلكترونية عصرية وسريعة ومحسّنة لمحركات البحث في المغرب. مواقع تعريفية ابتداءً من 850 درهم، شعار، Google Business وصيانة. عرض سعر مجاني عبر واتساب.',
+            added: 'تمت الإضافة',
+            removed: 'تم الإلغاء',
+            alertTitle: 'تنبيه',
+            alert: 'الرجاء اختيار خدمة على الأقل',
+            remove: 'إزالة',
+            currency: 'درهم',
+            perMonth: 'درهم/شهر',
+            greeting: 'مرحباً، أرغب في الحصول على عرض سعر للخدمات التالية:\n\n',
+            total: 'المجموع التقديري',
+            closing: '\n\nأرجو إرسال التفاصيل الكاملة وشكراً.',
+            contact: 'مرحباً، أرغب في معرفة المزيد عن خدماتكم.',
+            review: 'مرحباً، أرغب في ترك تقييم لـ YanCode: ',
+            qrLabel: 'رمز QR لترك تقييم'
+        },
+        en: {
+            title: 'YanCode — Modern websites for your business',
+            description: 'YanCode builds modern, fast, SEO-optimised websites in Morocco. Showcase sites from 850 MAD, logo design, Google Business and maintenance. Free quote on WhatsApp.',
+            added: 'Added',
+            removed: 'Removed',
+            alertTitle: 'Notice',
+            alert: 'Please select at least one service',
+            remove: 'Remove',
+            currency: 'MAD',
+            perMonth: 'MAD/month',
+            greeting: 'Hello, I would like a quote for:\n\n',
+            total: 'Estimated Total',
+            closing: '\n\nPlease send me the details. Thank you.',
+            contact: 'Hello, I would like more information about your services.',
+            review: 'Hello, I would like to leave a review for YanCode: ',
+            qrLabel: 'QR code to leave a review'
+        }
+    };
+
+    let currentLang = DEFAULT_LANG;
+    const t = () => i18n[currentLang];
+    const priceFormat = new Intl.NumberFormat('fr-FR');
+    const formatPrice = n => priceFormat.format(n);
+
+    // Keyboard support for clickable non-button elements
+    function makePressable(el) {
+        el.setAttribute('role', 'button');
+        el.tabIndex = 0;
+        el.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                el.click();
+            }
+        });
+    }
+
+    // ============================================================
     // LANGUAGE SWITCHER
     // ============================================================
     const langOptions = document.querySelectorAll('.lang-dropdown .option');
     const langDropdown = document.getElementById('langDropdown');
     const langSelected = document.getElementById('langSelected');
     const allLangElements = document.querySelectorAll('[data-lang]');
+    const metaDescription = document.querySelector('meta[name="description"]');
 
-    let currentLang = 'ar';
+    function readSavedLang() {
+        const fromUrl = new URLSearchParams(window.location.search).get('lang');
+        if (LANGS.includes(fromUrl)) return fromUrl;
+        try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (LANGS.includes(saved)) return saved;
+        } catch (e) { /* storage unavailable */ }
+        return DEFAULT_LANG;
+    }
 
     function setLanguage(lang) {
+        if (!LANGS.includes(lang)) lang = DEFAULT_LANG;
         currentLang = lang;
+        try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* storage unavailable */ }
+
         langOptions.forEach(opt => {
-            opt.classList.toggle('active', opt.dataset.langValue === lang);
-        });
-        langSelected.querySelectorAll('span').forEach(el => {
-            el.classList.toggle('active', el.dataset.lang === lang);
+            const active = opt.dataset.langValue === lang;
+            opt.classList.toggle('active', active);
+            opt.setAttribute('aria-selected', active);
         });
         allLangElements.forEach(el => {
             el.classList.toggle('active', el.dataset.lang === lang);
         });
+
         const html = document.documentElement;
-        if (lang === 'ar') {
-            html.setAttribute('dir', 'rtl');
-            html.setAttribute('lang', 'ar');
-            document.body.classList.add('rtl');
-        } else {
-            html.setAttribute('dir', 'ltr');
-            html.setAttribute('lang', lang);
-            document.body.classList.remove('rtl');
-        }
-        langDropdown.classList.remove('open');
-        document.getElementById('navLinks').classList.remove('open');
+        html.setAttribute('lang', lang);
+        html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+        document.body.classList.toggle('rtl', lang === 'ar');
+        document.title = t().title;
+        if (metaDescription) metaDescription.setAttribute('content', t().description);
+
+        closeLangMenu();
+        closeMobileMenu();
         updateSummary();
+        updateContactLinks();
+        renderReviewQr();
     }
+
+    function closeLangMenu() {
+        langDropdown.classList.remove('open');
+        langSelected.setAttribute('aria-expanded', 'false');
+    }
+
+    makePressable(langSelected);
+    langSelected.setAttribute('aria-haspopup', 'listbox');
+    langSelected.setAttribute('aria-expanded', 'false');
+    langDropdown.querySelector('.menu').setAttribute('role', 'listbox');
 
     langSelected.addEventListener('click', function(e) {
         e.stopPropagation();
-        langDropdown.classList.toggle('open');
+        const open = langDropdown.classList.toggle('open');
+        langSelected.setAttribute('aria-expanded', open);
+        if (open) langDropdown.querySelector('.option.active').focus();
     });
 
     langOptions.forEach(opt => {
+        makePressable(opt);
+        opt.setAttribute('role', 'option');
         opt.addEventListener('click', function() {
             setLanguage(this.dataset.langValue);
+            langSelected.focus();
         });
     });
 
-    document.addEventListener('click', function(e) {
-        if (!langDropdown.contains(e.target)) {
-            langDropdown.classList.remove('open');
+    langDropdown.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLangMenu();
+            langSelected.focus();
         }
     });
 
@@ -59,35 +170,27 @@
     // ============================================================
     const hamburger = document.getElementById('hamburger');
     const navLinksContainer = document.getElementById('navLinks');
+    const hamburgerIcon = hamburger.querySelector('i');
 
+    function closeMobileMenu() {
+        navLinksContainer.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburgerIcon.classList.add('fa-bars');
+        hamburgerIcon.classList.remove('fa-times');
+    }
+
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-controls', 'navLinks');
     hamburger.addEventListener('click', function(e) {
         e.stopPropagation();
-        navLinksContainer.classList.toggle('open');
-        const icon = this.querySelector('i');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
+        const open = navLinksContainer.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', open);
+        hamburgerIcon.classList.toggle('fa-bars', !open);
+        hamburgerIcon.classList.toggle('fa-times', open);
     });
 
     navLinksContainer.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', function() {
-            navLinksContainer.classList.remove('open');
-            const icon = hamburger.querySelector('i');
-            if (icon) {
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
-            }
-        });
-    });
-
-    document.addEventListener('click', function(e) {
-        if (!navLinksContainer.contains(e.target) && !hamburger.contains(e.target)) {
-            navLinksContainer.classList.remove('open');
-            const icon = hamburger.querySelector('i');
-            if (icon) {
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
-            }
-        }
+        link.addEventListener('click', closeMobileMenu);
     });
 
     // ============================================================
@@ -96,39 +199,44 @@
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', function() {
         navbar.classList.toggle('scrolled', window.scrollY > 20);
-    });
+    }, { passive: true });
 
     // ============================================================
     // SCROLL ANIMATIONS
     // ============================================================
-    const fadeElements = document.querySelectorAll('.fade-up');
-    const staggerElements = document.querySelectorAll('.stagger');
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    fadeElements.forEach(el => observer.observe(el));
-    staggerElements.forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up, .stagger').forEach(el => observer.observe(el));
 
     // ============================================================
     // FAQ TOGGLE
     // ============================================================
-    document.querySelectorAll('.faq-card').forEach(card => {
+    const faqCards = document.querySelectorAll('.faq-card');
+
+    function syncFaq() {
+        faqCards.forEach(c => {
+            c.querySelector('.faq-question').setAttribute('aria-expanded', c.classList.contains('open'));
+        });
+    }
+
+    faqCards.forEach(card => {
         const question = card.querySelector('.faq-question');
+        makePressable(question);
         question.addEventListener('click', function() {
             const isOpen = card.classList.contains('open');
-            // Close all other FAQ cards
-            document.querySelectorAll('.faq-card').forEach(c => c.classList.remove('open'));
-            if (!isOpen) {
-                card.classList.add('open');
-            }
+            faqCards.forEach(c => c.classList.remove('open'));
+            if (!isOpen) card.classList.add('open');
+            syncFaq();
         });
     });
+    syncFaq();
 
     // ============================================================
     // TOAST NOTIFICATION
@@ -136,210 +244,181 @@
     const toast = document.getElementById('toast');
     const toastTitle = document.getElementById('toastTitle');
     const toastMessage = document.getElementById('toastMessage');
-    const toastClose = document.getElementById('toastClose');
+    const toastIcon = toast.querySelector('.toast-icon i');
     let toastTimeout = null;
 
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+
     function showToast(title, message, icon = 'fa-check') {
-        if (toastTimeout) {
-            clearTimeout(toastTimeout);
-        }
+        clearTimeout(toastTimeout);
         toastTitle.textContent = title;
         toastMessage.textContent = message;
-        const iconEl = toast.querySelector('.toast-icon i');
-        iconEl.className = 'fas ' + icon;
+        toastIcon.className = 'fas ' + icon;
         toast.classList.add('show');
-        toastTimeout = setTimeout(function() {
-            toast.classList.remove('show');
-            toastTimeout = null;
-        }, 3500);
+        toastTimeout = setTimeout(hideToast, 3500);
     }
 
-    toastClose.addEventListener('click', function() {
+    function hideToast() {
         toast.classList.remove('show');
-        if (toastTimeout) {
-            clearTimeout(toastTimeout);
-            toastTimeout = null;
-        }
-    });
+        clearTimeout(toastTimeout);
+        toastTimeout = null;
+    }
 
+    document.getElementById('toastClose').addEventListener('click', hideToast);
+
+    // ============================================================
+    // OUTSIDE CLICKS: close menus and toast
+    // ============================================================
     document.addEventListener('click', function(e) {
-        if (toast.classList.contains('show') && !toast.contains(e.target)) {
-            toast.classList.remove('show');
-            if (toastTimeout) {
-                clearTimeout(toastTimeout);
-                toastTimeout = null;
-            }
-        }
+        if (!langDropdown.contains(e.target)) closeLangMenu();
+        if (!navLinksContainer.contains(e.target) && !hamburger.contains(e.target)) closeMobileMenu();
+        // Clicks that open a toast must not immediately close it
+        const opensToast = e.target.closest('.builder-option, .builder-selected-item, #builderWhatsAppBtn');
+        if (toast.classList.contains('show') && !toast.contains(e.target) && !opensToast) hideToast();
     });
 
     // ============================================================
     // GLOBAL BUILDER
     // ============================================================
-    const phoneNumber = '212704771336';
-    const baseUrl = 'https://wa.me/' + phoneNumber;
-
-    const serviceLabels = {
-        'basic': { ar: 'موقع تعريفي - أساسي', fr: 'Site vitrine - Basique', en: 'Showcase - Basic' },
-        'professional': { ar: 'موقع احترافي - متقدم', fr: 'Site professionnel - Avancé', en: 'Professional - Advanced' },
-        'premium': { ar: 'موقع متكامل - بريميوم', fr: 'Site complet - Premium', en: 'Complete - Premium' },
-        'logo': { ar: 'تصميم شعار احترافي', fr: 'Création de logo', en: 'Logo Design' },
-        'google': { ar: 'هوية Google Business', fr: 'Identité Google Business', en: 'Google Business' },
-        'review': { ar: 'باقة التقييمات الذكية', fr: 'Pack Avis Intelligent', en: 'Smart Review Pack' },
-        'pages': { ar: 'إضافة صفحة جديدة', fr: 'Ajouter une page', en: 'Add new page' },
-        'content': { ar: 'تحديث المحتوى', fr: 'Mise à jour contenu', en: 'Content update' },
-        'features': { ar: 'إضافة مميزات جديدة', fr: 'Ajouter des fonctionnalités', en: 'Add new features' },
-        'maintenance': { ar: 'صيانة شهرية', fr: 'Maintenance mensuelle', en: 'Monthly maintenance' }
-    };
-
-    const toastMsgs = {
-        'ar': { added: 'تم إضافة: ', removed: 'تم إلغاء: ', alert: 'الرجاء اختيار خدمة على الأقل' },
-        'fr': { added: 'Ajouté: ', removed: 'Supprimé: ', alert: 'Veuillez sélectionner un service' },
-        'en': { added: 'Added: ', removed: 'Removed: ', alert: 'Please select a service' }
-    };
-
-    const waMsgs = {
-        'ar': {
-            greeting: 'مرحباً، أرغب في الحصول على عرض سعر للخدمات التالية:\n\n',
-            empty: '⚠️ لم يتم اختيار أي خدمة بعد.\n',
-            total: 'المجموع التقديري',
-            currency: 'درهم',
-            closing: '\n\nأرجو إرسال التفاصيل الكاملة وشكراً.'
-        },
-        'fr': {
-            greeting: 'Bonjour, je souhaite obtenir un devis pour :\n\n',
-            empty: '⚠️ Aucun service sélectionné.\n',
-            total: 'Total estimé',
-            currency: 'MAD',
-            closing: '\n\nMerci de m\'envoyer les détails.'
-        },
-        'en': {
-            greeting: 'Hello, I would like a quote for:\n\n',
-            empty: '⚠️ No services selected.\n',
-            total: 'Estimated Total',
-            currency: 'MAD',
-            closing: '\n\nPlease send me the details. Thank you.'
-        }
-    };
+    const services = {};
+    document.querySelectorAll('.builder-option').forEach(option => {
+        services[option.dataset.service] = {
+            el: option,
+            price: parseInt(option.dataset.price, 10),
+            monthly: option.dataset.recurring === 'monthly'
+        };
+    });
 
     let selectedServices = [];
 
-    document.querySelectorAll('.builder-option').forEach(option => {
-        option.addEventListener('click', function() {
-            const serviceId = this.dataset.service;
-            const price = parseInt(this.dataset.price);
-            const index = selectedServices.findIndex(s => s.id === serviceId);
+    function serviceName(id) {
+        const el = services[id].el.querySelector('.option-name[data-lang="' + currentLang + '"]');
+        return el ? el.textContent.trim() : id;
+    }
 
-            if (index > -1) {
-                selectedServices.splice(index, 1);
-                this.classList.remove('selected');
-                const name = serviceLabels[serviceId]?.[currentLang] || serviceId;
-                showToast('❌ ' + (toastMsgs[currentLang]?.removed || 'Removed: '), (toastMsgs[
-                    currentLang]?.removed || 'Removed: ') + name, 'fa-times');
-            } else {
-                const websiteServices = ['basic', 'professional', 'premium'];
-                if (websiteServices.includes(serviceId)) {
-                    document.querySelectorAll('.builder-option').forEach(opt => {
-                        if (websiteServices.includes(opt.dataset.service)) {
-                            opt.classList.remove('selected');
-                            const idx = selectedServices.findIndex(s => s.id === opt.dataset
-                                .service);
-                            if (idx > -1) selectedServices.splice(idx, 1);
-                        }
-                    });
-                }
-                selectedServices.push({ id: serviceId, price: price });
-                this.classList.add('selected');
-                const name = serviceLabels[serviceId]?.[currentLang] || serviceId;
-                showToast('✅ ' + (toastMsgs[currentLang]?.added || 'Added: '), (toastMsgs[
-                    currentLang]?.added || 'Added: ') + name, 'fa-plus-circle');
+    function servicePrice(id) {
+        const s = services[id];
+        return formatPrice(s.price) + ' ' + (s.monthly ? t().perMonth : t().currency);
+    }
+
+    function totals() {
+        return selectedServices.reduce((acc, id) => {
+            const s = services[id];
+            acc[s.monthly ? 'monthly' : 'oneTime'] += s.price;
+            return acc;
+        }, { oneTime: 0, monthly: 0 });
+    }
+
+    function toggleService(id) {
+        if (selectedServices.includes(id)) {
+            selectedServices = selectedServices.filter(s => s !== id);
+            showToast(t().removed, serviceName(id), 'fa-times');
+        } else {
+            // Only one website package at a time
+            if (WEBSITE_SERVICES.includes(id)) {
+                selectedServices = selectedServices.filter(s => !WEBSITE_SERVICES.includes(s));
             }
-            updateSummary();
-        });
+            selectedServices.push(id);
+            showToast(t().added, serviceName(id), 'fa-plus-circle');
+        }
+        updateSummary();
+    }
+
+    Object.keys(services).forEach(id => {
+        const el = services[id].el;
+        makePressable(el);
+        el.addEventListener('click', () => toggleService(id));
     });
 
+    const totalPriceEl = document.getElementById('totalPrice');
+    const monthlyPriceEl = document.getElementById('monthlyPrice');
+    const selectedList = document.getElementById('selectedList');
+
     function updateSummary() {
-        const total = selectedServices.reduce((sum, s) => sum + s.price, 0);
-        document.getElementById('totalPrice').textContent = total;
-
-        const list = document.getElementById('selectedList');
-        list.innerHTML = '';
-        selectedServices.forEach((s, index) => {
-            const span = document.createElement('span');
-            span.className = 'builder-selected-item';
-            const name = serviceLabels[s.id]?.[currentLang] || s.id;
-            span.innerHTML = name +
-                ' <span class="remove-btn" data-index="' + index + '"><i class="fas fa-times"></i></span>';
-            list.appendChild(span);
+        Object.keys(services).forEach(id => {
+            const selected = selectedServices.includes(id);
+            services[id].el.classList.toggle('selected', selected);
+            services[id].el.setAttribute('aria-pressed', selected);
         });
 
-        document.querySelectorAll('.builder-selected-item .remove-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const idx = parseInt(this.dataset.index);
-                const serviceId = selectedServices[idx].id;
-                selectedServices.splice(idx, 1);
-                document.querySelectorAll('.builder-option').forEach(opt => {
-                    if (opt.dataset.service === serviceId) {
-                        opt.classList.remove('selected');
-                    }
-                });
-                const name = serviceLabels[serviceId]?.[currentLang] || serviceId;
-                showToast('❌ ' + (toastMsgs[currentLang]?.removed || 'Removed: '), (toastMsgs[
-                    currentLang]?.removed || 'Removed: ') + name, 'fa-times');
-                updateSummary();
-            });
-        });
+        const { oneTime, monthly } = totals();
+        totalPriceEl.textContent = formatPrice(oneTime);
+        monthlyPriceEl.hidden = monthly === 0;
+        monthlyPriceEl.textContent = '+ ' + formatPrice(monthly) + ' ' + t().perMonth;
+
+        selectedList.replaceChildren(...selectedServices.map(id => {
+            const item = document.createElement('span');
+            item.className = 'builder-selected-item';
+            item.textContent = serviceName(id) + ' ';
+            const remove = document.createElement('span');
+            remove.className = 'remove-btn';
+            remove.dataset.service = id;
+            remove.setAttribute('aria-label', t().remove + ' ' + serviceName(id));
+            remove.innerHTML = '<i class="fas fa-times"></i>';
+            makePressable(remove);
+            item.appendChild(remove);
+            return item;
+        }));
     }
 
-    function buildWhatsAppMessage() {
-        const msgs = waMsgs[currentLang] || waMsgs['ar'];
+    selectedList.addEventListener('click', function(e) {
+        const btn = e.target.closest('.remove-btn');
+        if (btn) toggleService(btn.dataset.service);
+    });
+
+    // ============================================================
+    // WHATSAPP
+    // ============================================================
+    function whatsAppUrl(text) {
+        return baseUrl + '?text=' + encodeURIComponent(text);
+    }
+
+    function buildQuoteMessage() {
+        const msgs = t();
+        const { oneTime, monthly } = totals();
         let message = msgs.greeting;
-
-        if (selectedServices.length === 0) {
-            message += msgs.empty;
-        } else {
-            let total = 0;
-            selectedServices.forEach(s => {
-                const name = serviceLabels[s.id]?.[currentLang] || s.id;
-                message += '  ✓ ' + name + ' (' + s.price + ' ' + msgs.currency + ')\n';
-                total += s.price;
-            });
-            message += '\n📊 *' + msgs.total + ': ' + total + ' ' + msgs.currency + '*';
-        }
-
-        message += msgs.closing;
-        return encodeURIComponent(message);
-    }
-
-    function sendWhatsAppMessage() {
-        if (selectedServices.length === 0) {
-            showToast('⚠️ تنبيه', toastMsgs[currentLang]?.alert || 'Please select a service',
-            'fa-exclamation-triangle');
-            return;
-        }
-        const message = buildWhatsAppMessage();
-        const url = baseUrl + '?text=' + message;
-        window.open(url, '_blank');
+        selectedServices.forEach(id => {
+            message += '  ✓ ' + serviceName(id) + ' (' + servicePrice(id) + ')\n';
+        });
+        message += '\n📊 *' + msgs.total + ': ' + formatPrice(oneTime) + ' ' + msgs.currency;
+        if (monthly) message += ' + ' + formatPrice(monthly) + ' ' + msgs.perMonth;
+        message += '*' + msgs.closing;
+        return message;
     }
 
     document.getElementById('builderWhatsAppBtn').addEventListener('click', function(e) {
         e.preventDefault();
-        sendWhatsAppMessage();
+        if (selectedServices.length === 0) {
+            showToast(t().alertTitle, t().alert, 'fa-exclamation-triangle');
+            return;
+        }
+        window.open(whatsAppUrl(buildQuoteMessage()), '_blank', 'noopener');
     });
 
-    document.getElementById('mainWhatsAppBtn').addEventListener('click', function(e) {
-        e.preventDefault();
-        sendWhatsAppMessage();
-    });
+    // Contact buttons open a plain chat, no package required
+    const contactLinks = [document.getElementById('mainWhatsAppBtn'), document.getElementById('floatWhatsAppBtn')];
 
-    document.getElementById('floatWhatsAppBtn').addEventListener('click', function(e) {
-        e.preventDefault();
-        sendWhatsAppMessage();
-    });
+    function updateContactLinks() {
+        contactLinks.forEach(link => { link.href = whatsAppUrl(t().contact); });
+    }
+
+    // ============================================================
+    // REVIEW QR CODE
+    // ============================================================
+    const reviewQr = document.getElementById('reviewQr');
+
+    function renderReviewQr() {
+        const url = REVIEW_URL || whatsAppUrl(t().review);
+        reviewQr.href = url;
+        reviewQr.setAttribute('aria-label', t().qrLabel);
+        if (typeof window.qrcode !== 'function') return; // library not loaded: keep icon fallback
+        const qr = window.qrcode(0, 'M');
+        qr.addData(url);
+        qr.make();
+        reviewQr.innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true, alt: t().qrLabel });
+    }
 
     // ---- Init Language ----
-    setLanguage('ar');
-
-    console.log('✅ YanCode — Redesigned FAQ with grid layout');
-    console.log('💡 Select services to build your custom package.');
+    setLanguage(readSavedLang());
 })();

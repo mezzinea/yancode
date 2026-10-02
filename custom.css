@@ -1977,3 +1977,68 @@ body.rtl .whatsapp-float {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* ===== LAYOUT (replaces spacing <br>s) ===== */
+.process-step h4[data-lang].active,
+.process-step p[data-lang].active,
+.review-banner .review-content h3[data-lang].active,
+.review-banner .review-content p[data-lang].active {
+    display: block;
+}
+.process-step h4 {
+    margin-bottom: 8px;
+}
+.review-banner .review-content h3 {
+    margin: 6px 0 10px;
+}
+
+/* ===== BUILDER MONTHLY TOTAL ===== */
+.builder-total .total-monthly {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--teal-dark);
+}
+.builder-total .total-monthly[hidden] {
+    display: none;
+}
+
+/* ===== REVIEW QR CODE ===== */
+.review-banner .qr-wrapper .qr-box {
+    display: block;
+    color: inherit;
+}
+.review-banner .qr-wrapper .qr-box svg {
+    display: block;
+    width: 120px;
+    height: 120px;
+}
+
+/* ===== KEYBOARD FOCUS ===== */
+.builder-option:focus-visible,
+.faq-question:focus-visible,
+.lang-dropdown .selected:focus-visible,
+.lang-dropdown .option:focus-visible,
+.remove-btn:focus-visible,
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
+        scroll-behavior: auto !important;
+    }
+    .fade-up,
+    .stagger > * {
+        opacity: 1;
+        transform: none;
+    }
+}
