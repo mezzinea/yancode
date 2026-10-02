@@ -19,11 +19,13 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Noto+Naskh+Arabic:wght@500;600&family=Taviraj:ital,wght@0,300;0,400;1,300&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="custom.css?v2">
+    <link rel="stylesheet" href="custom.css?v4">
 </head>
 <body>
+
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
     <!-- ===== TOAST NOTIFICATION ===== -->
     <div class="toast-container" id="toastContainer">
@@ -42,7 +44,7 @@
         <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; width: 100%;">
             <div class="navbar-left">
                 <a href="#" class="logo">
-                    <div>YanCode</div>
+                    <div>Yan<span>Code</span></div>
                     <small data-lang="ar">مواقع عصريّة لأعمالك</small>
                     <small class="active" data-lang="fr">Sites modernes pour Vous.</small>
                     <small data-lang="en">Modern Websites for You.</small>
@@ -104,31 +106,27 @@
                 </div>
             </div>
 
-            <div class="hero-description-box">
-                <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
-                <blockquote>
-                    <span data-lang="ar">
-                        "نصنع <span class="highlight">هويتك الرقمية</span> بأناقة واحترافية،
-                        لأن موقعك الإلكتروني هو <span class="highlight">انطباعك الأول</span> أمام عملائك."
-                    </span>
-                    <span class="active" data-lang="fr">
-                        "Nous créons votre <span class="highlight">identité numérique</span> avec élégance et professionnalisme,
-                        car votre site web est votre <span class="highlight">première impression</span>."
-                    </span>
-                    <span data-lang="en">
-                        "We craft your <span class="highlight">digital identity</span> with elegance and professionalism,
-                        because your website is your <span class="highlight">first impression</span>."
-                    </span>
-                </blockquote>
-                <div class="author">
-                    <div class="avatar">Y</div>
-                    <div class="info">
-                        <strong>YanCode</strong>
-                        <span data-lang="ar">حلول رقمية مبتكرة</span>
-                        <span class="active" data-lang="fr">Solutions numériques innovantes</span>
-                        <span data-lang="en">Innovative digital solutions</span>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="mock-browser">
+                    <div class="mock-bar"><span></span><span></span><span></span><div class="mock-url"><i class="fas fa-lock"></i> votre-site.ma</div></div>
+                    <div class="mock-page">
+                        <div class="mock-nav"><b>Atelier</b><i></i><i></i><i></i><u></u></div>
+                        <div class="mock-hero">
+                            <div class="mock-text"><em></em><strong><span data-lang="ar">موقع يشبهك.</span><span class="active" data-lang="fr">Un site qui vous ressemble.</span><span data-lang="en">A website that feels like you.</span></strong><i></i><i class="short"></i><u></u></div>
+                            <div class="mock-img"></div>
+                        </div>
+                        <div class="mock-cards"><div></div><div></div><div></div></div>
                     </div>
                 </div>
+                <div class="mock-phone">
+                    <div class="mock-notch"></div>
+                    <div class="mock-img"></div>
+                    <strong><span data-lang="ar">مرحباً</span><span class="active" data-lang="fr">Bienvenue</span><span data-lang="en">Welcome</span></strong>
+                    <i></i><i class="short"></i><u></u>
+                </div>
+                <div class="float-chip chip-1"><i class="fas fa-mobile-screen"></i> <span data-lang="ar">متجاوب</span><span class="active" data-lang="fr">Responsive</span><span data-lang="en">Responsive</span></div>
+                <div class="float-chip chip-2"><i class="fas fa-magnifying-glass"></i> SEO</div>
+                <div class="float-chip chip-3"><i class="fas fa-bolt"></i> <span data-lang="ar">سريع</span><span class="active" data-lang="fr">Rapide</span><span data-lang="en">Fast</span></div>
             </div>
         </section>
 
@@ -138,11 +136,41 @@
                 <span class="label" data-lang="ar">موثوق من قبل</span>
                 <span class="label active" data-lang="fr">Approuvé par</span>
                 <span class="label" data-lang="en">Trusted by</span>
-                <div class="logos">
-                    <span>✦ Startups</span>
-                    <span>✦ <span data-lang="ar">وكالات</span><span class="active" data-lang="fr">Agences</span><span data-lang="en">Agencies</span></span>
-                    <span>✦ <span data-lang="ar">متاجر إلكترونية</span><span class="active" data-lang="fr">E-commerces</span><span data-lang="en">E-commerce</span></span>
-                    <span>✦ <span data-lang="ar">مطاعم</span><span class="active" data-lang="fr">Restaurants</span><span data-lang="en">Restaurants</span></span>
+                <div class="marquee">
+                    <div class="marquee-track">
+                        <span>✦ Startups</span><span>✦ <span data-lang="ar">وكالات</span><span class="active" data-lang="fr">Agences</span><span data-lang="en">Agencies</span></span><span>✦ <span data-lang="ar">متاجر إلكترونية</span><span class="active" data-lang="fr">E-commerces</span><span data-lang="en">E-commerce</span></span><span>✦ <span data-lang="ar">مطاعم</span><span class="active" data-lang="fr">Restaurants</span><span data-lang="en">Restaurants</span></span>
+                        <span>✦ Startups</span><span>✦ <span data-lang="ar">وكالات</span><span class="active" data-lang="fr">Agences</span><span data-lang="en">Agencies</span></span><span>✦ <span data-lang="ar">متاجر إلكترونية</span><span class="active" data-lang="fr">E-commerces</span><span data-lang="en">E-commerce</span></span><span>✦ <span data-lang="ar">مطاعم</span><span class="active" data-lang="fr">Restaurants</span><span data-lang="en">Restaurants</span></span>
+                        <span>✦ Startups</span><span>✦ <span data-lang="ar">وكالات</span><span class="active" data-lang="fr">Agences</span><span data-lang="en">Agencies</span></span><span>✦ <span data-lang="ar">متاجر إلكترونية</span><span class="active" data-lang="fr">E-commerces</span><span data-lang="en">E-commerce</span></span><span>✦ <span data-lang="ar">مطاعم</span><span class="active" data-lang="fr">Restaurants</span><span data-lang="en">Restaurants</span></span>
+                        <span>✦ Startups</span><span>✦ <span data-lang="ar">وكالات</span><span class="active" data-lang="fr">Agences</span><span data-lang="en">Agencies</span></span><span>✦ <span data-lang="ar">متاجر إلكترونية</span><span class="active" data-lang="fr">E-commerces</span><span data-lang="en">E-commerce</span></span><span>✦ <span data-lang="ar">مطاعم</span><span class="active" data-lang="fr">Restaurants</span><span data-lang="en">Restaurants</span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== MANIFESTO ===== -->
+        <section class="manifesto fade-up">
+            <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+            <blockquote>
+                <span data-lang="ar">
+                    "نصنع <span class="highlight">هويتك الرقمية</span> بأناقة واحترافية،
+                    لأن موقعك الإلكتروني هو <span class="highlight">انطباعك الأول</span> أمام عملائك."
+                </span>
+                <span class="active" data-lang="fr">
+                    "Nous créons votre <span class="highlight">identité numérique</span> avec élégance et professionnalisme,
+                    car votre site web est votre <span class="highlight">première impression</span>."
+                </span>
+                <span data-lang="en">
+                    "We craft your <span class="highlight">digital identity</span> with elegance and professionalism,
+                    because your website is your <span class="highlight">first impression</span>."
+                </span>
+            </blockquote>
+            <div class="author">
+                <div class="avatar">Y</div>
+                <div class="info">
+                    <strong>YanCode</strong>
+                    <span data-lang="ar">حلول رقمية مبتكرة</span>
+                    <span class="active" data-lang="fr">Solutions numériques innovantes</span>
+                    <span data-lang="en">Innovative digital solutions</span>
                 </div>
             </div>
         </section>
@@ -165,6 +193,26 @@
                 <div class="service-card"><i class="fas fa-search"></i><h4 data-lang="ar">تحسين SEO</h4><h4 class="active" data-lang="fr">Optimisation SEO</h4><h4 data-lang="en">SEO Optimization</h4><p data-lang="ar">ظهور أفضل في البحث</p><p class="active" data-lang="fr">Meilleure visibilité</p><p data-lang="en">Better search visibility</p></div>
                 <div class="service-card"><i class="fas fa-server"></i><h4 data-lang="ar">استضافة مجانية</h4><h4 class="active" data-lang="fr">Hébergement gratuit</h4><h4 data-lang="en">Free Hosting</h4><p data-lang="ar">لمدة سنة كاملة</p><p class="active" data-lang="fr">Pour un an</p><p data-lang="en">For one year</p></div>
                 <div class="service-card"><i class="fas fa-expand-arrows-alt"></i><h4 data-lang="ar">قابل للتطوير</h4><h4 class="active" data-lang="fr">Évolutif</h4><h4 data-lang="en">Scalable</h4><p data-lang="ar">أضف مزايا مستقبلاً</p><p class="active" data-lang="fr">Ajoutez des fonctionnalités</p><p data-lang="en">Add features later</p></div>
+            </div>
+        </section>
+
+        <!-- ===== KEY FIGURES ===== -->
+        <section class="stats-band fade-up">
+            <div class="stat">
+                <span class="stat-num"><span data-count="50">50</span><em>+</em></span>
+                <span class="stat-label" data-lang="ar">مشروع منجز</span><span class="stat-label active" data-lang="fr">projets livrés</span><span class="stat-label" data-lang="en">projects delivered</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num"><span data-count="4.9" data-decimals="1">4.9</span><em>/5</em></span>
+                <span class="stat-label" data-lang="ar">متوسط تقييم العملاء</span><span class="stat-label active" data-lang="fr">note moyenne clients</span><span class="stat-label" data-lang="en">average client rating</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num">7–<span data-count="14">14</span></span>
+                <span class="stat-label" data-lang="ar">يوماً لإنجاز موقعك</span><span class="stat-label active" data-lang="fr">jours de réalisation</span><span class="stat-label" data-lang="en">days to launch</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num"><span data-count="1">1</span></span>
+                <span class="stat-label" data-lang="ar">سنة استضافة مجانية</span><span class="stat-label active" data-lang="fr">an d'hébergement offert</span><span class="stat-label" data-lang="en">year of free hosting</span>
             </div>
         </section>
 
@@ -220,6 +268,9 @@
                 <span class="section-subtitle active" data-lang="fr">Choisissez les services dont vous avez besoin</span>
                 <span class="section-subtitle" data-lang="en">Select the services you need</span>
             </div>
+
+            <div class="builder-layout">
+            <div class="builder-main">
 
             <!-- Category 1: Website Creation -->
             <div class="builder-category">
@@ -367,8 +418,11 @@
                 </div>
             </div>
 
+            </div>
+
             <!-- Builder Summary -->
-            <div class="builder-summary">
+            <aside class="builder-summary">
+                <h3 class="builder-summary-title"><span data-lang="ar">باقتك</span><span class="active" data-lang="fr">Votre offre</span><span data-lang="en">Your package</span></h3>
                 <div class="builder-total">
                     <span class="total-label" data-lang="ar">المجموع التقديري</span>
                     <span class="total-label active" data-lang="fr">Total estimé</span>
@@ -386,6 +440,7 @@
                         <span data-lang="en">Request Quote</span>
                     </a>
                 </div>
+            </aside>
             </div>
         </section>
 
@@ -564,10 +619,35 @@
         </section>
 
         <!-- ===== FOOTER ===== -->
-        <footer>
-            <div><span class="brand">Yan<span style="color:var(--teal);">Code</span></span> © 2026 · <span data-lang="ar">مواقع عصريّة لأعمالك</span><span class="active" data-lang="fr">Sites modernes</span><span data-lang="en">Modern Websites</span></div>
-            <div class="social">
-                <a href="https://wa.me/212704771336" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <footer class="site-footer">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <a href="#" class="brand">Yan<span>Code</span></a>
+                    <p><span data-lang="ar">مواقع عصرية وسريعة، مصممة لتحويل زوارك إلى عملاء.</span><span class="active" data-lang="fr">Des sites modernes et rapides, pensés pour transformer vos visiteurs en clients.</span><span data-lang="en">Modern, fast websites designed to turn your visitors into customers.</span></p>
+                    <div class="social">
+                        <a href="https://wa.me/212704771336" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4><span data-lang="ar">روابط</span><span class="active" data-lang="fr">Navigation</span><span data-lang="en">Navigation</span></h4>
+                    <ul>
+                        <li><a href="#services"><span data-lang="ar">خدماتنا</span><span class="active" data-lang="fr">Services</span><span data-lang="en">Services</span></a></li>
+                        <li><a href="#builder"><span data-lang="ar">بناء باقات</span><span class="active" data-lang="fr">Créez votre offre</span><span data-lang="en">Build your package</span></a></li>
+                        <li><a href="#testimonials"><span data-lang="ar">آراء العملاء</span><span class="active" data-lang="fr">Avis clients</span><span data-lang="en">Reviews</span></a></li>
+                        <li><a href="#faq"><span data-lang="ar">أسئلة شائعة</span><span class="active" data-lang="fr">FAQ</span><span data-lang="en">FAQ</span></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4><span data-lang="ar">تواصل</span><span class="active" data-lang="fr">Contact</span><span data-lang="en">Contact</span></h4>
+                    <ul>
+                        <li><a href="tel:+212704771336" dir="ltr">+212 704-771336</a></li>
+                        <li><a href="https://wa.me/212704771336" target="_blank" rel="noopener">WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 YanCode</span>
+                <span><span data-lang="ar">صُنع بعناية في المغرب</span><span class="active" data-lang="fr">Fait avec soin au Maroc</span><span data-lang="en">Made with care in Morocco</span></span>
             </div>
         </footer>
     </div>
@@ -578,7 +658,7 @@
     </a>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-    <script src="custom.js?v2"></script>
+    <script src="custom.js?v3"></script>
 
 </body>
 </html>

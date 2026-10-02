@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr Omayma Khadiri — Dermatologue à Agadir</title>
+    <meta name="description" content="Dr Omayma Khadiri, dermatologue à Agadir (Talborjt) : dermatologie générale, pédiatrique et esthétique, médecine anti-âge, allergologie. Rendez-vous par téléphone ou WhatsApp.">
+    <meta name="theme-color" content="#340B10">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Dr Omayma Khadiri — Dermatologue à Agadir">
+    <meta property="og:description" content="Cabinet de dermatologie à Talborjt, Agadir. Rendez-vous par téléphone ou WhatsApp.">
+    <meta property="og:image" content="images/hero-portrait.jpg">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:locale:alternate" content="ar_MA">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Noto+Naskh+Arabic:wght@500;600&family=Taviraj:wght@300;400&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Physician",
+        "name": "Dr Omayma Khadiri",
+        "medicalSpecialty": "Dermatology",
+        "telephone": "+212528822121",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "N° 14, 2ème étage, Centre d'Affaires Talborjt",
+            "addressLocality": "Agadir",
+            "addressCountry": "MA"
+        },
+        "openingHoursSpecification": [
+            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "12:30" },
+            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "15:00", "closes": "18:00" },
+            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "12:30" }
+        ],
+        "availableLanguage": ["French", "English", "Turkish"],
+        "paymentAccepted": "Cash, Credit Card, Cheque, Bank transfer"
+    }
+    </script>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="#top" class="brand">
+                <span data-lang="fr">Dr Omayma Khadiri</span>
+                <span data-lang="ar">د. أميمة الخضيري</span>
+            </a>
+            <nav class="nav" aria-label="Navigation">
+                <a href="#approche"><span data-lang="fr">Approche</span><span data-lang="ar">مقاربتنا</span></a>
+                <a href="#docteur"><span data-lang="fr">Le docteur</span><span data-lang="ar">الطبيبة</span></a>
+                <a href="#soins"><span data-lang="fr">Offre de soins</span><span data-lang="ar">العلاجات</span></a>
+                <a href="#cabinet"><span data-lang="fr">Infos pratiques</span><span data-lang="ar">معلومات عملية</span></a>
+            </nav>
+            <div class="header-actions">
+                <button type="button" class="lang-toggle" id="langToggle">
+                    <span data-lang="fr" lang="ar">العربية</span>
+                    <span data-lang="ar" lang="fr">Français</span>
+                </button>
+                <a href="#rendez-vous" class="btn btn-red">
+                    <span data-lang="fr">Prendre rendez-vous</span><span data-lang="ar">احجز موعداً</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main id="top">
+
+        <!-- ===== HERO ===== -->
+        <section class="hero">
+            <div class="container hero-inner">
+                <div class="hero-text">
+                    <p class="eyebrow">
+                        <span data-lang="fr">Cabinet de dermatologie · Agadir</span>
+                        <span data-lang="ar">عيادة الأمراض الجلدية · أكادير</span>
+                    </p>
+                    <h1>
+                        <span data-lang="fr">Prendre soin de votre peau, à chaque âge.</span>
+                        <span data-lang="ar">العناية ببشرتك في كل مراحل العمر.</span>
+                    </h1>
+                    <p class="lead" data-lang="fr">Dr Omayma Khadiri vous accueille à Talborjt pour la dermatologie générale, pédiatrique et esthétique : peau, cheveux et ongles, pour toute la famille.</p>
+                    <p class="lead" data-lang="ar">تستقبلكم الدكتورة أميمة الخضيري بتالبرجت في الأمراض الجلدية العامة، أمراض جلد الأطفال والطب التجميلي: البشرة والشعر والأظافر لجميع أفراد العائلة.</p>
+                    <div class="hero-actions">
+                        <a href="https://wa.me/212671818169" class="btn btn-red" id="whatsappBtn" target="_blank" rel="noopener">
+                            <i class="fab fa-whatsapp"></i>
+                            <span data-lang="fr">Rendez-vous WhatsApp</span><span data-lang="ar">موعد عبر واتساب</span>
+                        </a>
+                        <a href="tel:+212528822121" class="btn btn-line">
+                            <i class="fas fa-phone"></i>
+                            <span dir="ltr">05 28 82 21 21</span>
+                        </a>
+                    </div>
+                    <p class="open-status" id="openStatus" hidden></p>
+                </div>
+                <figure class="hero-image">
+                    <img src="images/hero-portrait.jpg" alt="" width="1100" height="1375" fetchpriority="high">
+                </figure>
+            </div>
+
+            <div class="container">
+                <dl class="facts">
+                    <div>
+                        <dt><span data-lang="fr">Adresse</span><span data-lang="ar">العنوان</span></dt>
+                        <dd data-lang="fr">N° 14, 2ème étage, Centre d'Affaires Talborjt</dd>
+                        <dd data-lang="ar">رقم 14، الطابق الثاني، مركز الأعمال تالبرجت</dd>
+                    </div>
+                    <div>
+                        <dt><span data-lang="fr">Horaires</span><span data-lang="ar">أوقات العمل</span></dt>
+                        <dd data-lang="fr">Lun – Ven 9h–12h30 · 15h–18h · Sam 9h–12h30</dd>
+                        <dd data-lang="ar">الإثنين – الجمعة 9:00–12:30 · 15:00–18:00 · السبت 9:00–12:30</dd>
+                    </div>
+                    <div>
+                        <dt><span data-lang="fr">Langues</span><span data-lang="ar">اللغات</span></dt>
+                        <dd data-lang="fr">Français · Anglais · Turc</dd>
+                        <dd data-lang="ar">الفرنسية · الإنجليزية · التركية</dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        <!-- ===== APPROACH ===== -->
+        <section class="section section-skin" id="approche">
+            <div class="container">
+                <p class="eyebrow">
+                    <span data-lang="fr">Notre approche</span><span data-lang="ar">مقاربتنا</span>
+                </p>
+                <h2 class="section-title">
+                    <span data-lang="fr">Une dermatologie médicale, humaine et attentive.</span>
+                    <span data-lang="ar">طب جلدي دقيق، إنساني ومتأنٍّ.</span>
+                </h2>
+                <div class="pillars">
+                    <article>
+                        <span class="pillar-num">01</span>
+                        <h3 data-lang="fr">Une approche avant tout médicale</h3>
+                        <h3 data-lang="ar">مقاربة طبية أولاً</h3>
+                        <p data-lang="fr">Chaque consultation commence par un examen attentif et un diagnostic précis, avant de proposer un traitement adapté.</p>
+                        <p data-lang="ar">تبدأ كل استشارة بفحص دقيق وتشخيص واضح، قبل اقتراح العلاج المناسب.</p>
+                    </article>
+                    <article>
+                        <span class="pillar-num">02</span>
+                        <h3 data-lang="fr">Pour toute la famille</h3>
+                        <h3 data-lang="ar">لجميع أفراد العائلة</h3>
+                        <p data-lang="fr">Du nourrisson à l'adulte, avec une formation spécifique en dermatologie pédiatrique.</p>
+                        <p data-lang="ar">من الرضيع إلى البالغ، مع تكوين متخصص في أمراض جلد الأطفال.</p>
+                    </article>
+                    <article>
+                        <span class="pillar-num">03</span>
+                        <h3 data-lang="fr">Une esthétique raisonnée</h3>
+                        <h3 data-lang="ar">تجميل متوازن</h3>
+                        <p data-lang="fr">Des soins esthétiques proposés avec mesure, toujours adaptés à votre peau et à vos attentes.</p>
+                        <p data-lang="ar">علاجات تجميلية مدروسة، ملائمة دائماً لبشرتك ولتطلعاتك.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== DOCTOR ===== -->
+        <section class="section" id="docteur">
+            <div class="container split">
+                <figure class="split-image">
+                    <img src="images/serum.jpg" alt="" width="1000" height="1500" loading="lazy">
+                </figure>
+                <div class="split-text">
+                    <p class="eyebrow">
+                        <span data-lang="fr">Le docteur</span><span data-lang="ar">الطبيبة</span>
+                    </p>
+                    <h2 class="section-title">
+                        <span data-lang="fr">Dr Omayma Khadiri</span>
+                        <span data-lang="ar">الدكتورة أميمة الخضيري</span>
+                    </h2>
+                    <p class="body-large" data-lang="fr">Dermatologue formée au Maroc et en France, le Dr Khadiri a exercé en milieu hospitalier avant d'ouvrir son cabinet à Agadir.</p>
+                    <p class="body-large" data-lang="ar">طبيبة أمراض جلدية تلقت تكوينها بالمغرب وفرنسا، عملت الدكتورة الخضيري بالمستشفيات قبل افتتاح عيادتها بأكادير.</p>
+                    <ol class="credentials">
+                        <li>
+                            <strong data-lang="fr">Faculté de Médecine et de Pharmacie de Marrakech</strong>
+                            <strong data-lang="ar">كلية الطب والصيدلة بمراكش</strong>
+                            <span data-lang="fr">Lauréate</span><span data-lang="ar">خريجة</span>
+                        </li>
+                        <li>
+                            <strong data-lang="fr">CHU d'Amiens et CH du Havre, France</strong>
+                            <strong data-lang="ar">المركز الاستشفائي الجامعي بأميان ومستشفى لوهافر، فرنسا</strong>
+                            <span data-lang="fr">Ancienne médecin hospitalière</span><span data-lang="ar">طبيبة سابقة بالمستشفى</span>
+                        </li>
+                        <li>
+                            <strong data-lang="fr">Université de Nantes, France</strong>
+                            <strong data-lang="ar">جامعة نانت، فرنسا</strong>
+                            <span data-lang="fr">Diplômée en dermatologie pédiatrique</span><span data-lang="ar">دبلوم في أمراض جلد الأطفال</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CARE ===== -->
+        <section class="section section-dark" id="soins">
+            <div class="container care">
+                <div class="care-intro">
+                    <p class="eyebrow">
+                        <span data-lang="fr">Offre de soins</span><span data-lang="ar">العلاجات</span>
+                    </p>
+                    <h2 class="section-title">
+                        <span data-lang="fr">Des soins pour la peau, les cheveux et les ongles.</span>
+                        <span data-lang="ar">علاجات للبشرة والشعر والأظافر.</span>
+                    </h2>
+                    <figure class="care-image">
+                        <img src="images/soin-visage.jpg" alt="" width="1400" height="933" loading="lazy">
+                    </figure>
+                </div>
+                <ol class="care-list">
+                    <li>
+                        <span class="care-num">01</span>
+                        <div>
+                            <h3 data-lang="fr">Dermatologie générale</h3>
+                            <h3 data-lang="ar">الأمراض الجلدية العامة</h3>
+                            <p data-lang="fr">Diagnostic et traitement des affections de la peau, du cuir chevelu et des ongles.</p>
+                            <p data-lang="ar">تشخيص وعلاج أمراض الجلد وفروة الرأس والأظافر.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="care-num">02</span>
+                        <div>
+                            <h3 data-lang="fr">Dermatologie pédiatrique</h3>
+                            <h3 data-lang="ar">أمراض جلد الأطفال</h3>
+                            <p data-lang="fr">Prise en charge des problèmes de peau du nourrisson, de l'enfant et de l'adolescent.</p>
+                            <p data-lang="ar">التكفل بمشاكل البشرة عند الرضع والأطفال والمراهقين.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="care-num">03</span>
+                        <div>
+                            <h3 data-lang="fr">Dermatologie esthétique</h3>
+                            <h3 data-lang="ar">الأمراض الجلدية التجميلية</h3>
+                            <p data-lang="fr">Soins pour améliorer la qualité, l'éclat et l'aspect de la peau.</p>
+                            <p data-lang="ar">علاجات لتحسين جودة البشرة ونضارتها ومظهرها.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="care-num">04</span>
+                        <div>
+                            <h3 data-lang="fr">Médecine morphologique et anti-âge</h3>
+                            <h3 data-lang="ar">الطب المورفولوجي ومكافحة الشيخوخة</h3>
+                            <p data-lang="fr">Prévention et prise en charge des signes du vieillissement cutané.</p>
+                            <p data-lang="ar">الوقاية من علامات شيخوخة الجلد ومعالجتها.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="care-num">05</span>
+                        <div>
+                            <h3 data-lang="fr">Allergologie</h3>
+                            <h3 data-lang="ar">الحساسية</h3>
+                            <p data-lang="fr">Bilan et suivi des allergies à manifestation cutanée.</p>
+                            <p data-lang="ar">تشخيص ومتابعة أنواع الحساسية التي تظهر على الجلد.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="care-num">06</span>
+                        <div>
+                            <h3 data-lang="fr">Vénérologie</h3>
+                            <h3 data-lang="ar">الأمراض المنقولة جنسياً</h3>
+                            <p data-lang="fr">Dépistage et traitement des infections sexuellement transmissibles, en toute confidentialité.</p>
+                            <p data-lang="ar">الكشف عن الأمراض المنقولة جنسياً وعلاجها في سرية تامة.</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ===== IMAGE BAND ===== -->
+        <section class="band" aria-hidden="true">
+            <img src="images/masque.jpg" alt="" width="1200" height="800" loading="lazy">
+        </section>
+
+        <!-- ===== PRACTICAL INFO ===== -->
+        <section class="section" id="cabinet">
+            <div class="container">
+                <p class="eyebrow">
+                    <span data-lang="fr">Infos pratiques</span><span data-lang="ar">معلومات عملية</span>
+                </p>
+                <h2 class="section-title">
+                    <span data-lang="fr">Le cabinet, au cœur de Talborjt.</span>
+                    <span data-lang="ar">العيادة في قلب تالبرجت.</span>
+                </h2>
+                <div class="practice">
+                    <div class="practice-info">
+                        <h3 data-lang="fr">Horaires d'ouverture</h3>
+                        <h3 data-lang="ar">أوقات العمل</h3>
+                        <table class="hours" id="hoursTable">
+                            <tr data-day="1"><th><span data-lang="fr">Lundi</span><span data-lang="ar">الإثنين</span></th><td>09:00 – 12:30 · 15:00 – 18:00</td></tr>
+                            <tr data-day="2"><th><span data-lang="fr">Mardi</span><span data-lang="ar">الثلاثاء</span></th><td>09:00 – 12:30 · 15:00 – 18:00</td></tr>
+                            <tr data-day="3"><th><span data-lang="fr">Mercredi</span><span data-lang="ar">الأربعاء</span></th><td>09:00 – 12:30 · 15:00 – 18:00</td></tr>
+                            <tr data-day="4"><th><span data-lang="fr">Jeudi</span><span data-lang="ar">الخميس</span></th><td>09:00 – 12:30 · 15:00 – 18:00</td></tr>
+                            <tr data-day="5"><th><span data-lang="fr">Vendredi</span><span data-lang="ar">الجمعة</span></th><td>09:00 – 12:30 · 15:00 – 18:00</td></tr>
+                            <tr data-day="6"><th><span data-lang="fr">Samedi</span><span data-lang="ar">السبت</span></th><td>09:00 – 12:30</td></tr>
+                            <tr data-day="0"><th><span data-lang="fr">Dimanche</span><span data-lang="ar">الأحد</span></th><td><span data-lang="fr">Fermé</span><span data-lang="ar">مغلق</span></td></tr>
+                        </table>
+
+                        <div class="info-grid">
+                            <div>
+                                <h3 data-lang="fr">Adresse</h3>
+                                <h3 data-lang="ar">العنوان</h3>
+                                <p data-lang="fr">N° 14, 2ème étage<br>Centre d'Affaires Talborjt<br>Agadir</p>
+                                <p data-lang="ar">رقم 14، الطابق الثاني<br>مركز الأعمال تالبرجت<br>أكادير</p>
+                            </div>
+                            <div>
+                                <h3 data-lang="fr">Paiement</h3>
+                                <h3 data-lang="ar">طرق الأداء</h3>
+                                <p data-lang="fr">Espèces · Carte bancaire<br>Chèque · Virement</p>
+                                <p data-lang="ar">نقداً · بطاقة بنكية<br>شيك · تحويل بنكي</p>
+                            </div>
+                        </div>
+
+                        <a href="https://maps.google.com/?q=Centre+d%27Affaires+Talborjt+Agadir" class="btn btn-line" target="_blank" rel="noopener">
+                            <i class="fas fa-diamond-turn-right"></i>
+                            <span data-lang="fr">Itinéraire</span><span data-lang="ar">الاتجاهات</span>
+                        </a>
+                    </div>
+                    <div class="map">
+                        <iframe title="Carte du cabinet" src="https://www.google.com/maps?q=Centre+d%27Affaires+Talborjt+Agadir&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== BOOKING ===== -->
+        <section class="section section-skin" id="rendez-vous">
+            <div class="container booking">
+                <figure class="booking-image">
+                    <img src="images/creme.jpg" alt="" width="1000" height="1504" loading="lazy">
+                </figure>
+                <div class="booking-text">
+                    <p class="eyebrow">
+                        <span data-lang="fr">Rendez-vous</span><span data-lang="ar">المواعيد</span>
+                    </p>
+                    <h2 class="section-title">
+                        <span data-lang="fr">Réserver une consultation</span>
+                        <span data-lang="ar">احجز استشارة</span>
+                    </h2>
+                    <p class="body-large" data-lang="fr">Par téléphone, sur WhatsApp ou en ligne sur Med.ma.</p>
+                    <p class="body-large" data-lang="ar">عبر الهاتف أو واتساب أو عبر الإنترنت على Med.ma.</p>
+                    <ul class="booking-links">
+                        <li>
+                            <a href="tel:+212528822121">
+                                <span><i class="fas fa-phone"></i> <span data-lang="fr">Téléphone</span><span data-lang="ar">الهاتف</span></span>
+                                <span dir="ltr">05 28 82 21 21</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/212671818169" id="whatsappLink" target="_blank" rel="noopener">
+                                <span><i class="fab fa-whatsapp"></i> WhatsApp</span>
+                                <span dir="ltr">06 71 81 81 69</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.med.ma/medecin/dermatologue/agadir/dr-omayma-khadiri-229290" target="_blank" rel="noopener">
+                                <span><i class="fas fa-calendar-check"></i> <span data-lang="fr">En ligne</span><span data-lang="ar">عبر الإنترنت</span></span>
+                                <span>Med.ma <i class="fas fa-arrow-up-right-from-square"></i></span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="emergency">
+                        <i class="fas fa-triangle-exclamation"></i>
+                        <span data-lang="fr">En cas d'urgence médicale, composez le 141 (SAMU).</span>
+                        <span data-lang="ar">في حالة الطوارئ الطبية، اتصل بالرقم 141 (الإسعاف).</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div>
+                <p class="footer-brand">
+                    <span data-lang="fr">Dr Omayma Khadiri</span>
+                    <span data-lang="ar">د. أميمة الخضيري</span>
+                </p>
+                <p data-lang="fr">Dermatologue à Agadir</p>
+                <p data-lang="ar">طبيبة الأمراض الجلدية بأكادير</p>
+            </div>
+            <div>
+                <h4 data-lang="fr">Offre de soins</h4>
+                <h4 data-lang="ar">العلاجات</h4>
+                <ul data-lang="fr">
+                    <li>Dermatologie générale</li>
+                    <li>Dermatologie pédiatrique</li>
+                    <li>Dermatologie esthétique</li>
+                    <li>Anti-âge · Allergologie</li>
+                </ul>
+                <ul data-lang="ar">
+                    <li>الأمراض الجلدية العامة</li>
+                    <li>أمراض جلد الأطفال</li>
+                    <li>الأمراض الجلدية التجميلية</li>
+                    <li>مكافحة الشيخوخة · الحساسية</li>
+                </ul>
+            </div>
+            <div>
+                <h4 data-lang="fr">Contact</h4>
+                <h4 data-lang="ar">التواصل</h4>
+                <ul>
+                    <li><a href="tel:+212528822121" dir="ltr">05 28 82 21 21</a></li>
+                    <li><a href="https://wa.me/212671818169" target="_blank" rel="noopener" dir="ltr">06 71 81 81 69</a></li>
+                    <li data-lang="fr">Centre d'Affaires Talborjt, Agadir</li>
+                    <li data-lang="ar">مركز الأعمال تالبرجت، أكادير</li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <span>© <span id="year">2026</span> <span data-lang="fr">Cabinet Dr Omayma Khadiri</span><span data-lang="ar">عيادة الدكتورة أميمة الخضيري</span></span>
+            <span><span data-lang="fr">Site réalisé par</span><span data-lang="ar">تصميم</span> <a href="../../index.html">YanCode</a></span>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/212671818169" class="whatsapp-float" id="whatsappFloat" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>

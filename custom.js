@@ -197,9 +197,44 @@
     // STICKY NAVBAR
     // ============================================================
     const navbar = document.getElementById('navbar');
+    const scrollProgress = document.getElementById('scrollProgress');
     window.addEventListener('scroll', function() {
         navbar.classList.toggle('scrolled', window.scrollY > 20);
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        scrollProgress.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
     }, { passive: true });
+
+    // ============================================================
+    // KEY FIGURES COUNTERS
+    // ============================================================
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function animateCount(el) {
+        const target = parseFloat(el.dataset.count);
+        const decimals = parseInt(el.dataset.decimals || '0', 10);
+        const duration = 1400;
+        const start = performance.now();
+        function frame(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = (target * eased).toFixed(decimals);
+            if (progress < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+    }
+
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCount(entry.target);
+                counterObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.6 });
+
+    if (!reduceMotion) {
+        document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+    }
 
     // ============================================================
     // SCROLL ANIMATIONS
