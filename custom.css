@@ -1094,7 +1094,7 @@ body.rtl .process-step h4 {
 /* ===== PROJECTS ===== */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
 }
 .project {
@@ -1158,7 +1158,7 @@ body.rtl .process-step h4 {
 }
 .project-screen {
     display: block;
-    height: 300px;
+    height: 340px;
     overflow: hidden;
 }
 .project-screen img {
@@ -1169,7 +1169,7 @@ body.rtl .process-step h4 {
 }
 /* Scroll through the site on hover */
 .project:hover .project-screen img {
-    transform: translateY(calc(-100% + 300px));
+    transform: translateY(calc(-100% + 340px));
 }
 .project-body {
     display: flex;

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medina Surfing — Surf school & surf guiding in Rabat, Morocco</title>
+  <meta name="description" content="Mobile surf school in Rabat founded by Moroccan champion Abdel Elharim. Surf lessons from 200 MAD, surf guiding to the best spots, all levels. Book on WhatsApp.">
+  <meta name="theme-color" content="#0B2A3C">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Medina Surfing — Rabat, Morocco">
+  <meta property="og:description" content="Mobile surf school in Rabat founded by Moroccan champion Abdel Elharim. Surf lessons from 200 MAD, surf guiding to the best spots, all levels. Book on WhatsApp.">
+  <meta property="og:image" content="images/hero.webp">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <link rel="icon" href="images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SportsActivityLocation", "name": "Medina Surfing", "description": "Mobile surf school in Rabat founded by Moroccan champion Abdel Elharim. Surf lessons from 200 MAD, surf guiding to the best spots, all levels. Book on WhatsApp.", "telephone": "+212656578306", "email": "medinasurfing@gmail.com", "address": {"@type": "PostalAddress", "addressLocality": "Rabat", "addressCountry": "MA"}, "founder": {"@type": "Person", "name": "Abdel Elharim"}, "priceRange": "200–900 MAD", "image": "images/hero.webp", "sameAs": ["https://www.instagram.com/abdel_elharim/", "https://youtu.be/XUm4YcRm724"]}</script>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#top" class="brand" aria-label="Medina Surfing">
+      <img src="images/mark-white.png" class="brand-light" alt="" width="40" height="40">
+      <img src="images/mark.png" class="brand-dark" alt="" width="40" height="40">
+      <span>Medina Surfing</span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#offers"><span data-i18n="navLessons">Lessons</span></a>
+      <a href="#guiding"><span data-i18n="navGuiding">Guiding</span></a>
+      <a href="#coach"><span data-i18n="navCoach">Coach</span></a>
+      <a href="#spots"><span data-i18n="navSpots">Surf spots</span></a>
+      <a href="#community"><span data-i18n="navCommunity">Community</span></a>
+      <a href="#contact"><span data-i18n="navContact">Contact</span></a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang" id="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+      </div>
+      <a href="https://wa.me/212656578306" class="btn btn-coral btn-sm header-book" data-wa="waGeneral" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> <span data-i18n="bookNow">Book now</span></a>
+      <button type="button" class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <img class="hero-bg" src="images/hero.webp" alt="Abdel Elharim surfing" width="1920" height="1280" fetchpriority="high">
+  <div class="hero-inner">
+    <p class="hero-kicker" data-i18n="heroKicker">Mobile surf school · Rabat, Morocco</p>
+    <h1 class="hero-title"><span data-i18n="heroTitle1">Surf Rabat</span><br><span class="accent" data-i18n="heroTitle2">with a legend</span></h1>
+    <p class="hero-text" data-i18n="heroText">Lessons and surf guiding with Abdel Elharim, 11× Moroccan champion, and his certified instructors. All levels, all ages, the right wave at the right time.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/212656578306" class="btn btn-coral" data-wa="waGeneral" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> <span data-i18n="heroBook">Book on WhatsApp</span></a>
+      <a href="#offers" class="btn btn-glass"><span data-i18n="heroOffers">See our offers</span></a>
+    </div>
+  </div>
+  <ul class="hero-stats">
+    <li><i class="fas fa-trophy"></i> 11× <span data-i18n="s3">Moroccan champion</span></li>
+    <li><i class="fas fa-water"></i> <span data-i18n="heroStat1">30+ years of surf</span></li>
+    <li><i class="fas fa-users"></i> <span data-i18n="heroStat2">All levels & ages</span></li>
+    <li><i class="fas fa-tag"></i> <span data-i18n="heroStat3">From 200 MAD</span></li>
+  </ul>
+  <svg class="wave-edge" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C 240 90 480 0 720 34 C 960 68 1200 10 1440 44 V80 H0 Z"/></svg>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="section about" id="about">
+  <div class="container about-grid">
+    <div>
+      <h2 class="title"><span data-i18n="aboutTitle1">Your surf school</span> <span class="accent" data-i18n="aboutTitle2">in Rabat</span></h2>
+      <span class="underline" aria-hidden="true"></span>
+    </div>
+    <div class="about-text">
+      <p data-i18n="aboutText1">We're a mobile surf school based in Rabat, founded by former WSL surfer and Moroccan champion Abdel Elharim. With expert local knowledge and certified instructors, we guide you to the best waves at the right time, safely and with stoke.</p>
+      <p data-i18n="aboutText2">Open to all levels and ages, our sessions are a fun, friendly way to surf, meet people and experience the local vibe, whether you're a resident, a traveler or a family.</p>
+    </div>
+  </div>
+  <div class="container features">
+    <div class="feature"><i class="fas fa-user-group"></i><span data-i18n="f1">Private & group lessons</span></div>
+    <div class="feature"><i class="fas fa-compass"></i><span data-i18n="f2">Surf guiding, all levels</span></div>
+    <div class="feature"><i class="fas fa-van-shuttle"></i><span data-i18n="f3">Weekend & week-long trips</span></div>
+    <div class="feature"><i class="fas fa-children"></i><span data-i18n="f4">Family-friendly</span></div>
+    <div class="feature"><i class="fas fa-people-group"></i><span data-i18n="f5">Team-building & groups</span></div>
+    <div class="feature"><i class="fas fa-person-swimming"></i><span data-i18n="f6">Board & wetsuit included</span></div>
+    <div class="feature"><i class="fas fa-shield-halved"></i><span data-i18n="f7">Max 8 per instructor</span></div>
+    <div class="feature"><i class="fas fa-certificate"></i><span data-i18n="f8">ISA certified coaching</span></div>
+    <div class="feature"><i class="fas fa-language"></i><span data-i18n="f9">5 languages spoken</span></div>
+    <div class="feature"><i class="fas fa-hand-holding-heart"></i><span data-i18n="f10">Free program for local kids</span></div>
+  </div>
+</section>
+
+<!-- ===== OFFERS ===== -->
+<section class="section section-sand" id="offers">
+  <div class="container">
+    <h2 class="title title-center"><span data-i18n="offersTitle1">Choose your</span> <span class="accent" data-i18n="offersTitle2">experience</span></h2>
+    <span class="underline underline-center" aria-hidden="true"></span>
+    <p class="section-sub" data-i18n="offersSub">Clear prices per person, equipment included. Book in a message on WhatsApp.</p>
+    <div class="offers">
+      <article class="offer">
+        <div class="offer-media"><img src="images/lesson-beginner.webp" alt="" width="900" height="900" loading="lazy"><span class="offer-badge"><span data-i18n="from">From</span> 200 MAD</span></div>
+        <div class="offer-body">
+          <h3 class="offer-title"><span data-i18n="lessonsName1">Surf</span> <span class="accent" data-i18n="lessonsName2">lessons</span></h3>
+          <p class="offer-meta" data-i18n="lessonsMeta">2 hours · beginners & intermediates · Rabat beach</p>
+          <ul class="offer-list"><li><i class="fas fa-check"></i> <span data-i18n="lessonsI1">2 hours of hands-on coaching with certified instructors</span></li><li><i class="fas fa-check"></i> <span data-i18n="lessonsI2">Surfboard & wetsuit included</span></li><li><i class="fas fa-check"></i> <span data-i18n="lessonsI3">Max 8 people per instructor</span></li><li><i class="fas fa-check"></i> <span data-i18n="lessonsI4">Learn to paddle, stand up, catch waves & stay safe</span></li></ul>
+          <ul class="price-list">
+            <li><span><span data-i18n="lessonsP1">Group (more than 8 people)</span></span><strong>200 MAD <small>/ 20€</small></strong></li>
+            <li><span><span data-i18n="lessonsP2">Small group (up to 8 people)</span></span><strong>300 MAD <small>/ 30€</small></strong></li>
+            <li><span><span data-i18n="lessonsP3">Private lesson (1-on-1)</span></span><strong>600 MAD <small>/ 60€</small></strong></li>
+          </ul>
+          <p class="offer-note" data-i18n="pp">per person</p>
+          <a href="https://wa.me/212656578306" class="btn btn-coral btn-block" data-wa="waLesson" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> <span data-i18n="lessonsBtn">Book a lesson</span></a>
+        </div>
+      </article>
+      <article class="offer offer-featured" id="guiding">
+        <div class="offer-media"><img src="images/guiding-van.webp" alt="" width="900" height="900" loading="lazy"><span class="offer-badge"><span data-i18n="from">From</span> 600 MAD</span></div>
+        <div class="offer-body">
+          <h3 class="offer-title"><span data-i18n="guidingName1">Surf</span> <span class="accent" data-i18n="guidingName2">guiding</span></h3>
+          <p class="offer-meta" data-i18n="guidingMeta">5-hour experience · all levels · with Abdel Elharim</p>
+          <ul class="offer-list"><li><i class="fas fa-check"></i> <span data-i18n="guidingI1">Round-trip transport from Rabat Medina (≈ 1 h drive)</span></li><li><i class="fas fa-check"></i> <span data-i18n="guidingI2">2 hours of in-water coaching & guiding</span></li><li><i class="fas fa-check"></i> <span data-i18n="guidingI3">Spot chosen on swell, wind, tide & season</span></li><li><i class="fas fa-check"></i> <span data-i18n="guidingI4">Board & wetsuit if needed · lunch at a seaside restaurant</span></li></ul>
+          <ul class="price-list">
+            <li><span><span data-i18n="guidingP1">Private session (1-on-1)</span></span><strong>900 MAD <small>/ 90€</small></strong></li>
+            <li><span><span data-i18n="guidingP2">Couple or group session</span></span><strong>600 MAD <small>/ 60€</small></strong></li>
+          </ul>
+          <div class="addon"><i class="fas fa-video"></i><div><strong><span data-i18n="guidingAddon">Add-on: video analysis</span> · 300 MAD / 30€</strong><small data-i18n="guidingAddonNote">Surf footage + short post-session review. Request in advance.</small></div></div>
+          <a href="https://wa.me/212656578306" class="btn btn-coral btn-block" data-wa="waGuiding" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> <span data-i18n="guidingBtn">Book surf guiding</span></a>
+        </div>
+      </article>
+      <article class="offer">
+        <div class="offer-media"><img src="images/community-kids.webp" alt="" width="900" height="900" loading="lazy"><span class="offer-badge offer-badge-free"><span data-i18n="free">Free</span></span></div>
+        <div class="offer-body">
+          <h3 class="offer-title"><span data-i18n="communityName1">Community</span> <span class="accent" data-i18n="communityName2">surf program</span></h3>
+          <p class="offer-meta" data-i18n="communityMeta">Free coaching for local kids</p>
+          <ul class="offer-list"><li><i class="fas fa-check"></i> <span data-i18n="communityI1">Kids from underprivileged backgrounds in the Rabat area</span></li><li><i class="fas fa-check"></i> <span data-i18n="communityI2">Run with a local non-profit through our surf association</span></li><li><i class="fas fa-check"></i> <span data-i18n="communityI3">Surf technique, ocean safety & environmental awareness</span></li><li><i class="fas fa-check"></i> <span data-i18n="communityI4">For intermediate & advanced surfers under 14</span></li></ul>
+          <a href="#community" class="btn btn-outline btn-block"><span data-i18n="communityBtn">Discover the program</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LEVELS ===== -->
+<section class="section">
+  <div class="container">
+    <h2 class="title title-center"><span data-i18n="levelsTitle1">Surfing for</span> <span class="accent" data-i18n="levelsTitle2">every level</span></h2>
+    <span class="underline underline-center" aria-hidden="true"></span>
+    <div class="levels">
+      <article class="level">
+        <img src="images/level-beginner.webp" alt="" width="900" height="900" loading="lazy">
+        <h3 class="level-title"><span data-i18n="lvl1A">Beginner</span> <span class="accent" data-i18n="lvl1B">surfer</span></h3>
+        <p data-i18n="lvl1T">Catch your first waves on the gentle beach breaks a 10-minute walk from the Medina. Learn to paddle, stand up and read the ocean, in a relaxed, positive atmosphere.</p>
+      </article>
+      <article class="level">
+        <img src="images/level-intermediate.webp" alt="" width="900" height="900" loading="lazy">
+        <h3 class="level-title"><span data-i18n="lvl2A">Intermediate</span> <span class="accent" data-i18n="lvl2B">surfer</span></h3>
+        <p data-i18n="lvl2T">Follow the open face of the wave, start turning left and right, and make the step from foam board to hard board with personal guidance.</p>
+      </article>
+      <article class="level">
+        <img src="images/level-advanced.webp" alt="" width="900" height="900" loading="lazy">
+        <h3 class="level-title"><span data-i18n="lvl3A">Advanced</span> <span class="accent" data-i18n="lvl3B">surfer</span></h3>
+        <p data-i18n="lvl3T">Reef and point breaks within 30 minutes of Rabat, chosen for the day’s swell, including La Crique in Bouznika: long, peeling waves in a sheltered cove.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COACH ===== -->
+<section class="coach" id="coach">
+  <div class="coach-media">
+    <img src="images/coach.webp" alt="Abdel Elharim" width="825" height="1100" loading="lazy">
+    <img src="images/coach-barrel.webp" alt="" class="coach-inset" width="900" height="900" loading="lazy">
+  </div>
+  <div class="coach-text">
+    <p class="kicker" data-i18n="coachKicker">Meet your surf coach</p>
+    <h2 class="title title-light">Abdel <span class="accent">Elharim</span></h2>
+    <p class="coach-roles" data-i18n="coachRoles">Founder · Former pro surfer · African champion · ISA & Moroccan Federation certified coach · Rip Curl team rider</p>
+    <p data-i18n="coachBio">Born in Rabat, Abdel made history as the first Moroccan to compete on the WSL QS Tour and the first ever invited to the legendary Pipeline Masters in Hawaii. He brings world-class knowledge, personal attention and a deep love for the ocean to every session, from complete beginners to competitive athletes.</p>
+    <ul class="coach-stats">
+      <li><strong>30+</strong><span data-i18n="s1">years of surf</span></li>
+      <li><strong>15+</strong><span data-i18n="s2">years coaching</span></li>
+      <li><strong>11×</strong><span data-i18n="s3">Moroccan champion</span></li>
+      <li><strong>5</strong><span data-i18n="s4">languages</span></li>
+    </ul>
+    <ul class="coach-highlights"><li><i class="fas fa-medal"></i> <span data-i18n="h1">African Champion & Rip Curl Africa Tour Champion</span></li><li><i class="fas fa-medal"></i> <span data-i18n="h2">Top 7 – WSL QS European Pro Tour</span></li><li><i class="fas fa-medal"></i> <span data-i18n="h3">¼ finalist – WSL Rip Curl Pro Pipeline Masters Trials, Hawaii</span></li><li><i class="fas fa-medal"></i> <span data-i18n="h4">Member of Rip Curl’s “The Search” program</span></li><li><i class="fas fa-medal"></i> <span data-i18n="h5">Lived and surfed in Hossegor, France for over 10 years</span></li></ul>
+    <div class="coach-actions">
+      <a href="https://youtu.be/XUm4YcRm724" class="btn btn-coral" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> <span data-i18n="watch">Watch Abdel surf</span></a>
+      <a href="https://www.instagram.com/abdel_elharim/" class="btn btn-glass" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> @abdel_elharim</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SPOTS ===== -->
+<section class="section" id="spots">
+  <div class="container spots-grid">
+    <div class="spots-media">
+      <img src="images/spot-breakwater.webp" alt="" width="900" height="900" loading="lazy">
+      <img src="images/spot-beach.webp" alt="" width="900" height="900" loading="lazy">
+      <div class="season"><i class="fas fa-sun"></i><div><small data-i18n="seasonLabel">Best season</small><strong data-i18n="season">September → May</strong></div></div>
+    </div>
+    <div class="spots-text">
+      <h2 class="title"><span data-i18n="spotsTitle1">Surf spots</span> <span class="accent" data-i18n="spotsTitle2">for all levels</span></h2>
+      <span class="underline" aria-hidden="true"></span>
+      <p data-i18n="spotsText">Rabat is one of Morocco’s most underrated surf destinations: uncrowded, consistent waves and a wide variety of spots. From Mehdia beach in the north to Bouznika bay in the south, everything is within a 30-minute drive.</p>
+      <div class="spot-cards">
+        <div class="spot"><span class="spot-num">01</span><div><h3 data-i18n="spot1T">Beach breaks</h3><p data-i18n="spot1D">Ideal for beginners and progression, a 10-minute walk from the Medina.</p></div></div>
+        <div class="spot"><span class="spot-num">02</span><div><h3 data-i18n="spot2T">Reefs & points</h3><p data-i18n="spot2D">Lefts, rights and slabs for more experienced surfers.</p></div></div>
+        <div class="spot"><span class="spot-num">03</span><div><h3 data-i18n="spot3T">La Crique, Bouznika</h3><p data-i18n="spot3D">Our hidden gem, the “uncrowded Imsouane”: long, peeling waves in a sheltered cove.</p></div></div>
+      </div>
+      <ul class="why-list"><li><i class="fas fa-check"></i> <span data-i18n="why1">Sunny all year round, warm and pleasant climate</span></li><li><i class="fas fa-check"></i> <span data-i18n="why2">Consistent waves in every season</span></li><li><i class="fas fa-check"></i> <span data-i18n="why3">Waves even on small-swell days thanks to multiple exposures</span></li><li><i class="fas fa-check"></i> <span data-i18n="why4">An authentic surf scene, far from the crowds of the south</span></li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMMUNITY ===== -->
+<section class="section section-sand" id="community">
+  <div class="container community-grid">
+    <div class="community-text">
+      <p class="kicker" data-i18n="communityKicker">Giving back</p>
+      <h2 class="title"><span data-i18n="communityTitle1">Free surf lessons</span> <span class="accent" data-i18n="communityTitle2">for kids</span></h2>
+      <span class="underline" aria-hidden="true"></span>
+      <p data-i18n="communityText">Through our surfing association and in partnership with a local non-profit, we offer free surf coaching to children from underprivileged backgrounds in the Rabat area. Surfing becomes a tool for confidence, education and community, with a strong “leave no trace” respect for the ocean.</p>
+      <h3 class="results-title" data-i18n="resultsTitle">Real results</h3>
+      <ul class="results">
+        <li><i class="fas fa-trophy"></i> <span data-i18n="r1">Regional and national competition wins</span></li>
+        <li><i class="fas fa-flag"></i> <span data-i18n="r2">Young surfers selected for the Moroccan national team</span></li>
+        <li><i class="fas fa-earth-africa"></i> <span data-i18n="r3">Kids competing internationally, following Abdel’s footsteps</span></li>
+      </ul>
+      <p class="eligibility"><i class="fas fa-circle-info"></i> <span data-i18n="eligibility">Open to intermediate and advanced surfers under 14 (not for beginners).</span></p>
+    </div>
+    <div class="community-media">
+      <img src="images/community-team.webp" alt="" width="900" height="900" loading="lazy">
+      <img src="images/community-kids.webp" alt="" width="900" height="900" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery">
+  <div class="container">
+    <h2 class="title title-center"><span data-i18n="galleryTitle1">Life in</span> <span class="accent" data-i18n="galleryTitle2">the water</span></h2>
+    <span class="underline underline-center" aria-hidden="true"></span>
+  </div>
+  <div class="container">
+    <p class="section-sub" data-i18n="gallerySub">Lessons, guiding trips and uncrowded lineups: a few moments from our sessions around Rabat.</p>
+    <div class="gallery-grid">
+    <button type="button" class="g-item g-a" data-index="0"><img src="images/coach-barrel.webp" alt="" width="900" height="900" loading="lazy"><span class="g-caption"><i class="fas fa-expand"></i> <span data-i18n="gal1">Barrel time</span></span></button>
+    <button type="button" class="g-item g-b" data-index="1"><img src="images/selfie.webp" alt="" width="900" height="900" loading="lazy"><span class="g-caption"><i class="fas fa-expand"></i> <span data-i18n="gal2">Good vibes only</span></span></button>
+    <button type="button" class="g-item g-c" data-index="2"><img src="images/crew.webp" alt="" width="900" height="900" loading="lazy"><span class="g-caption"><i class="fas fa-expand"></i> <span data-i18n="gal3">Group lesson</span></span></button>
+    <button type="button" class="g-item g-d" data-index="3"><img src="images/action.webp" alt="" width="900" height="900" loading="lazy"><span class="g-caption"><i class="fas fa-expand"></i> <span data-i18n="gal4">Rabat lineup</span></span></button>
+    <button type="button" class="g-item g-e" data-index="4"><img src="images/lesson-beginner.webp" alt="" width="900" height="900" loading="lazy"><span class="g-caption"><i class="fas fa-expand"></i> <span data-i18n="gal5">First waves</span></span></button>
+    <button type="button" class="g-item g-f" data-index="5"><img src="images/spot-cliff.webp" alt="" width="900" height="900" loading="lazy"><span class="g-caption"><i class="fas fa-expand"></i> <span data-i18n="gal6">Coastal views</span></span></button>
+    <button type="button" class="g-item g-g" data-index="6"><img src="images/friends.webp" alt="" width="900" height="900" loading="lazy"><span class="g-caption"><i class="fas fa-expand"></i> <span data-i18n="gal7">Surf crew</span></span></button>
+    <button type="button" class="g-item g-h" data-index="7"><img src="images/lesson-group.webp" alt="" width="900" height="900" loading="lazy"><span class="g-caption"><i class="fas fa-expand"></i> <span data-i18n="gal8">Learning together</span></span></button>
+    <button type="button" class="g-item g-i" data-index="8"><img src="images/peeling-wave.webp" alt="" width="900" height="900" loading="lazy"><span class="g-caption"><i class="fas fa-expand"></i> <span data-i18n="gal9">Uncrowded lineups</span></span></button>
+    </div>
+    <div class="center gallery-follow">
+      <a href="https://www.instagram.com/abdel_elharim/" class="btn btn-outline" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> <span data-i18n="galleryFollow">More moments on Instagram</span></a>
+    </div>
+  </div>
+</section>
+
+<dialog class="lightbox" id="lightbox" aria-label="Gallery">
+  <button type="button" class="lb-btn lb-close" data-lb="close" aria-label="Close"><i class="fas fa-xmark"></i></button>
+  <button type="button" class="lb-btn lb-prev" data-lb="prev" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
+  <figure class="lb-figure">
+    <img id="lbImage" src="" alt="">
+    <figcaption><span id="lbCaption"></span><span id="lbCount"></span></figcaption>
+  </figure>
+  <button type="button" class="lb-btn lb-next" data-lb="next" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
+</dialog>
+
+<!-- ===== REVIEWS ===== -->
+<section class="section section-sand" id="reviews">
+  <div class="container">
+    <h2 class="title title-center"><span data-i18n="reviewsTitle1">What our</span> <span class="accent" data-i18n="reviewsTitle2">surfers say</span></h2>
+    <span class="underline underline-center" aria-hidden="true"></span>
+    <p class="section-sub" data-i18n="reviewsSub">Real reviews from our Google page.</p>
+    <div class="reviews">
+      <figure class="review">
+        <div class="review-head"><span class="avatar">C</span><div><strong>Caroline Kern</strong><span class="stars" aria-label="5/5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></div><i class="fab fa-google review-g"></i></div>
+        <blockquote lang="en">“I had an amazing experience with Medina Surfing and Abdel’s mobile surf school! What makes this surf school unique is the flexibility of the mobile setup: you’re not limited to just one beach in Rabat. Abdel knows the best local surf spots and takes you where the waves are best that day.”</blockquote>
+      </figure>
+      <figure class="review">
+        <div class="review-head"><span class="avatar">J</span><div><strong>João Pedro Araújo</strong><span class="stars" aria-label="5/5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></div><i class="fab fa-google review-g"></i></div>
+        <blockquote lang="en">“Surf with a legend – Abdel Elharim! He knows every hidden surf spot around Rabat and will make sure you’re in the right place at the right time to catch the best uncrowded waves. 100% recommended!”</blockquote>
+      </figure>
+      <figure class="review">
+        <div class="review-head"><span class="avatar">S</span><div><strong>Simo</strong><span class="stars" aria-label="5/5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></div><i class="fab fa-google review-g"></i></div>
+        <blockquote lang="fr">« Superbe team avec une ambiance conviviale, des moniteurs passionnés et pédagogues. Le matériel est de qualité et les cours adaptés à tous les niveaux. Moi-même et mes deux garçons de 6-7 ans, on a été aux anges ! »</blockquote>
+      </figure>
+      <figure class="review">
+        <div class="review-head"><span class="avatar">E</span><div><strong>Evi Dirks</strong><span class="stars" aria-label="5/5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></div><i class="fab fa-google review-g"></i></div>
+        <blockquote lang="en">“Definitely 5 stars! Abdel is amazing, inside and outside the water. I had the best time in the water with Abdel. I learned and laughed a lot. Would definitely recommend!”</blockquote>
+      </figure>
+    </div>
+    <div class="center"><a href="https://www.google.com/maps/search/?api=1&query=Medina+Surfing+Rabat" class="btn btn-outline" target="_blank" rel="noopener"><i class="fab fa-google"></i> <span data-i18n="reviewsMore">Read all reviews on Google</span></a></div>
+  </div>
+</section>
+
+<!-- ===== PARTNERS ===== -->
+<section class="partners">
+  <div class="container partners-inner">
+    <p class="kicker" data-i18n="partnersTitle">Our partners</p>
+    <div class="partner-logos">
+      <img src="images/partner-ripcurl.png" alt="Rip Curl" width="360" height="189" loading="lazy">
+      <a href="https://www.fedesurfmaroc.com" target="_blank" rel="noopener"><img src="images/partner-frms.png" alt="Fédération Royale Marocaine de Surf" width="260" height="240" loading="lazy"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section" id="faq">
+  <div class="container faq-wrap">
+    <h2 class="title title-center"><span data-i18n="faqTitle1">Good to</span> <span class="accent" data-i18n="faqTitle2">know</span></h2>
+    <span class="underline underline-center" aria-hidden="true"></span>
+    <div class="faq-list">
+      <details class="faq" open>
+        <summary><span data-i18n="q1">Do I need any surf experience?</span><i class="fas fa-plus"></i></summary>
+        <p data-i18n="a1">No. Our lessons are designed for beginners and intermediates, and surf guiding is open to all levels, from motivated beginners to advanced riders.</p>
+      </details>
+      <details class="faq">
+        <summary><span data-i18n="q2">Is the equipment included?</span><i class="fas fa-plus"></i></summary>
+        <p data-i18n="a2">Yes. Surfboard and wetsuit are included in lessons, and provided if needed for surf guiding.</p>
+      </details>
+      <details class="faq">
+        <summary><span data-i18n="q3">Where do we meet?</span><i class="fas fa-plus"></i></summary>
+        <p data-i18n="a3">Lessons take place at Rabat beach, a 10-minute walk from the Medina. Surf guiding starts from Rabat Medina with round-trip transport to the best spot of the day.</p>
+      </details>
+      <details class="faq">
+        <summary><span data-i18n="q4">When is the best season?</span><i class="fas fa-plus"></i></summary>
+        <p data-i18n="a4">September to May, when the swell is most consistent. There are waves in every season, and Rabat is sunny all year round.</p>
+      </details>
+      <details class="faq">
+        <summary><span data-i18n="q5">Can children and families join?</span><i class="fas fa-plus"></i></summary>
+        <p data-i18n="a5">Absolutely. Our sessions are open to all ages and are a great activity to share as a family.</p>
+      </details>
+      <details class="faq">
+        <summary><span data-i18n="q6">How do I book?</span><i class="fas fa-plus"></i></summary>
+        <p data-i18n="a6">Send us a message on WhatsApp, call us or email us with your dates, level and number of people. We’ll confirm the best time for the waves.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta" id="contact">
+  <img class="cta-bg" src="images/peeling-wave.webp" alt="" width="900" height="900" loading="lazy">
+  <div class="container cta-inner">
+    <h2 class="title title-light title-center"><span data-i18n="ctaTitle1">Ready to</span> <span class="accent" data-i18n="ctaTitle2">surf?</span></h2>
+    <p data-i18n="ctaText">The waves of Rabat are waiting. Tell us your dates and level, we take care of the rest.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/212656578306" class="btn btn-coral btn-lg" data-wa="waGeneral" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> <span data-i18n="ctaWa">Book on WhatsApp</span></a>
+      <a href="tel:+212656578306" class="btn btn-glass btn-lg"><i class="fas fa-phone"></i> <span dir="ltr">+212 656 578 306</span></a>
+    </div>
+    <ul class="cta-info">
+      <li><i class="fas fa-envelope"></i> <a href="mailto:medinasurfing@gmail.com">medinasurfing@gmail.com</a></li>
+      <li><i class="fas fa-location-dot"></i> <span data-i18n="location">Rabat, Morocco</span></li>
+      <li><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/abdel_elharim/" target="_blank" rel="noopener">@abdel_elharim</a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo-white.png" alt="Medina Surfing" width="120" height="169">
+      <p data-i18n="footerTag">Mobile surf school in Rabat, Morocco. Good vibes only.</p>
+    </div>
+    <div>
+      <h3 data-i18n="footerOffers">Experiences</h3>
+      <a href="#offers"><span data-i18n="lessonsName1">Surf</span> <span data-i18n="lessonsName2">lessons</span></a>
+      <a href="#guiding">Surf guiding</a>
+      <a href="#community"><span data-i18n="communityName1">Community</span> <span data-i18n="communityName2">surf program</span></a>
+    </div>
+    <div>
+      <h3 data-i18n="footerInfo">Information</h3>
+      <a href="#coach">Abdel Elharim</a>
+      <a href="#spots"><span data-i18n="navSpots">Surf spots</span></a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div>
+      <h3 data-i18n="footerContact">Contact</h3>
+      <a href="https://wa.me/212656578306" data-wa="waGeneral" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="tel:+212656578306" dir="ltr"><i class="fas fa-phone"></i> +212 656 578 306</a>
+      <a href="mailto:medinasurfing@gmail.com"><i class="fas fa-envelope"></i> medinasurfing@gmail.com</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span id="year">2026</span> Medina Surfing. <span data-i18n="rights">All rights reserved.</span></span>
+    <span><span data-i18n="madeBy">Website by</span> <a href="../../index.html">YanCode</a></span>
+  </div>
+</footer>
+
+<a href="https://wa.me/212656578306" class="wa-float" data-wa="waGeneral" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+<script src="i18n.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
