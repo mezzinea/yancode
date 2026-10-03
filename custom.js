@@ -12,7 +12,7 @@
     // Set to your Google review link (Google Business Profile > "Ask for reviews").
     // While empty, the QR code opens a WhatsApp chat to leave a review.
     const REVIEW_URL = '';
-    const WEBSITE_SERVICES = ['basic', 'professional', 'premium'];
+    const WEBSITE_SERVICES = ['basic', 'professional'];
 
     const i18n = {
         fr: {
@@ -30,7 +30,15 @@
             closing: '\n\nMerci de m\'envoyer les détails.',
             contact: 'Bonjour, je souhaite avoir plus d\'informations sur vos services.',
             review: 'Bonjour, je souhaite laisser un avis sur YanCode : ',
-            qrLabel: 'QR code pour laisser un avis'
+            qrLabel: 'QR code pour laisser un avis',
+            next: 'Continuer',
+            skip: 'Passer cette étape',
+            stepOf: (n, total) => 'Étape ' + n + ' sur ' + total,
+            edit: 'Modifier',
+            reviewEmpty: 'Vous n\'avez encore choisi aucun service.',
+            reviewStart: 'Commencer à l\'étape 1',
+            oneTime: 'Total estimé',
+            monthlyLabel: 'Abonnement mensuel'
         },
         ar: {
             title: 'YanCode — مواقع إلكترونية عصرية لأعمالك',
@@ -47,7 +55,15 @@
             closing: '\n\nأرجو إرسال التفاصيل الكاملة وشكراً.',
             contact: 'مرحباً، أرغب في معرفة المزيد عن خدماتكم.',
             review: 'مرحباً، أرغب في ترك تقييم لـ YanCode: ',
-            qrLabel: 'رمز QR لترك تقييم'
+            qrLabel: 'رمز QR لترك تقييم',
+            next: 'متابعة',
+            skip: 'تخطَّ هذه الخطوة',
+            stepOf: (n, total) => 'الخطوة ' + n + ' من ' + total,
+            edit: 'تعديل',
+            reviewEmpty: 'لم تختر أي خدمة بعد.',
+            reviewStart: 'ابدأ من الخطوة 1',
+            oneTime: 'المجموع التقديري',
+            monthlyLabel: 'اشتراك شهري'
         },
         en: {
             title: 'YanCode — Modern websites for your business',
@@ -64,7 +80,15 @@
             closing: '\n\nPlease send me the details. Thank you.',
             contact: 'Hello, I would like more information about your services.',
             review: 'Hello, I would like to leave a review for YanCode: ',
-            qrLabel: 'QR code to leave a review'
+            qrLabel: 'QR code to leave a review',
+            next: 'Continue',
+            skip: 'Skip this step',
+            stepOf: (n, total) => 'Step ' + n + ' of ' + total,
+            edit: 'Edit',
+            reviewEmpty: 'You haven\'t picked any services yet.',
+            reviewStart: 'Start at step 1',
+            oneTime: 'Estimated total',
+            monthlyLabel: 'Monthly subscription'
         }
     };
 
@@ -309,7 +333,7 @@
         if (!langDropdown.contains(e.target)) closeLangMenu();
         if (!navLinksContainer.contains(e.target) && !hamburger.contains(e.target)) closeMobileMenu();
         // Clicks that open a toast must not immediately close it
-        const opensToast = e.target.closest('.builder-option, .builder-selected-item, #builderWhatsAppBtn');
+        const opensToast = e.target.closest('.builder-option, .builder-selected-item, #builderWhatsAppBtn, #reviewWhatsAppBtn');
         if (toast.classList.contains('show') && !toast.contains(e.target) && !opensToast) hideToast();
     });
 
@@ -321,7 +345,8 @@
         services[option.dataset.service] = {
             el: option,
             price: parseInt(option.dataset.price, 10),
-            monthly: option.dataset.recurring === 'monthly'
+            monthly: option.dataset.recurring === 'monthly',
+            step: Number(option.closest('.builder-step').dataset.step)
         };
     });
 
@@ -369,6 +394,7 @@
     const totalPriceEl = document.getElementById('totalPrice');
     const monthlyPriceEl = document.getElementById('monthlyPrice');
     const selectedList = document.getElementById('selectedList');
+    const navTotal = document.getElementById('navTotal');
 
     function updateSummary() {
         Object.keys(services).forEach(id => {
@@ -381,6 +407,7 @@
         totalPriceEl.textContent = formatPrice(oneTime);
         monthlyPriceEl.hidden = monthly === 0;
         monthlyPriceEl.textContent = '+ ' + formatPrice(monthly) + ' ' + t().perMonth;
+        navTotal.textContent = formatPrice(oneTime) + ' ' + t().currency + (monthly ? ' + ' + formatPrice(monthly) + ' ' + t().perMonth : '');
 
         selectedList.replaceChildren(...selectedServices.map(id => {
             const item = document.createElement('span');
@@ -395,11 +422,122 @@
             item.appendChild(remove);
             return item;
         }));
+
+        updateSteps();
     }
 
     selectedList.addEventListener('click', function(e) {
         const btn = e.target.closest('.remove-btn');
         if (btn) toggleService(btn.dataset.service);
+    });
+
+    // ============================================================
+    // BUILDER STEPS
+    // ============================================================
+    const builderSection = document.getElementById('builder');
+    const stepPanels = [...document.querySelectorAll('.builder-step')];
+    const stepItems = [...document.querySelectorAll('#builderSteps li')];
+    const stepPrev = document.getElementById('stepPrev');
+    const stepNext = document.getElementById('stepNext');
+    const stepNextLabel = document.getElementById('stepNextLabel');
+    const stepCount = document.getElementById('stepCount');
+    const reviewList = document.getElementById('reviewList');
+    const reviewStep = stepPanels.length - 1;
+    let currentStep = 0;
+
+    const selectedInStep = step => selectedServices.filter(id => services[id].step === step);
+
+    function stepTitle(step) {
+        const el = stepPanels[step].querySelector('.builder-category-title [data-lang="' + currentLang + '"]');
+        return el ? el.textContent.trim() : '';
+    }
+
+    function goToStep(step) {
+        currentStep = Math.max(0, Math.min(reviewStep, step));
+        updateSteps();
+        // Keep the step header in view when the panel changes height
+        if (builderSection.getBoundingClientRect().top < 0) {
+            document.getElementById('builderSteps').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    function updateSteps() {
+        stepPanels.forEach((panel, i) => { panel.hidden = i !== currentStep; });
+        stepItems.forEach((item, i) => {
+            item.classList.toggle('active', i === currentStep);
+            item.classList.toggle('done', i < reviewStep && selectedInStep(i).length > 0);
+            const button = item.querySelector('button');
+            if (i === currentStep) button.setAttribute('aria-current', 'step');
+            else button.removeAttribute('aria-current');
+        });
+        builderSection.classList.toggle('has-selection', selectedServices.length > 0);
+        stepPrev.disabled = currentStep === 0;
+        stepNext.hidden = currentStep === reviewStep;
+        stepNextLabel.textContent = selectedInStep(currentStep).length ? t().next : t().skip;
+        stepCount.textContent = t().stepOf(currentStep + 1, stepPanels.length);
+        if (currentStep === reviewStep) renderReview();
+    }
+
+    function renderReview() {
+        const msgs = t();
+        if (selectedServices.length === 0) {
+            reviewList.innerHTML = '<div class="review-empty"><p></p><button type="button" class="btn-outline" data-goto="0"></button></div>';
+            reviewList.querySelector('p').textContent = msgs.reviewEmpty;
+            reviewList.querySelector('button').textContent = msgs.reviewStart;
+            return;
+        }
+        const groups = [];
+        for (let step = 0; step < reviewStep; step++) {
+            const ids = selectedInStep(step);
+            if (!ids.length) continue;
+            const group = document.createElement('div');
+            group.className = 'review-group';
+            const head = document.createElement('div');
+            head.className = 'review-group-head';
+            const title = document.createElement('span');
+            title.textContent = stepTitle(step);
+            const edit = document.createElement('button');
+            edit.type = 'button';
+            edit.className = 'review-edit';
+            edit.dataset.goto = step;
+            edit.textContent = msgs.edit;
+            head.append(title, edit);
+            group.appendChild(head);
+            ids.forEach(id => {
+                const row = document.createElement('div');
+                row.className = 'review-row';
+                const name = document.createElement('span');
+                name.textContent = serviceName(id);
+                const price = document.createElement('strong');
+                price.textContent = servicePrice(id);
+                row.append(name, price);
+                group.appendChild(row);
+            });
+            groups.push(group);
+        }
+        const { oneTime, monthly } = totals();
+        const total = document.createElement('div');
+        total.className = 'review-total';
+        total.innerHTML = '<span></span><strong></strong>';
+        total.querySelector('span').textContent = msgs.oneTime;
+        total.querySelector('strong').textContent = formatPrice(oneTime) + ' ' + msgs.currency;
+        groups.push(total);
+        if (monthly) {
+            const sub = document.createElement('div');
+            sub.className = 'review-total review-total-monthly';
+            sub.innerHTML = '<span></span><strong></strong>';
+            sub.querySelector('span').textContent = msgs.monthlyLabel;
+            sub.querySelector('strong').textContent = '+ ' + formatPrice(monthly) + ' ' + msgs.perMonth;
+            groups.push(sub);
+        }
+        reviewList.replaceChildren(...groups);
+    }
+
+    stepPrev.addEventListener('click', () => goToStep(currentStep - 1));
+    stepNext.addEventListener('click', () => goToStep(currentStep + 1));
+    builderSection.addEventListener('click', function(e) {
+        const target = e.target.closest('[data-goto]');
+        if (target) goToStep(Number(target.dataset.goto));
     });
 
     // ============================================================
@@ -422,14 +560,17 @@
         return message;
     }
 
-    document.getElementById('builderWhatsAppBtn').addEventListener('click', function(e) {
+    function requestQuote(e) {
         e.preventDefault();
         if (selectedServices.length === 0) {
             showToast(t().alertTitle, t().alert, 'fa-exclamation-triangle');
             return;
         }
         window.open(whatsAppUrl(buildQuoteMessage()), '_blank', 'noopener');
-    });
+    }
+
+    document.getElementById('builderWhatsAppBtn').addEventListener('click', requestQuote);
+    document.getElementById('reviewWhatsAppBtn').addEventListener('click', requestQuote);
 
     // Contact buttons open a plain chat, no package required
     const contactLinks = [document.getElementById('mainWhatsAppBtn'), document.getElementById('floatWhatsAppBtn')];
